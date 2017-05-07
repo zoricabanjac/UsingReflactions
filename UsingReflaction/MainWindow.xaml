@@ -1,0 +1,145 @@
+﻿<Window x:Class="UsingReflaction.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="auto" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="490">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="Enter class name: " Name="lblClassName" HorizontalAlignment="Left" Grid.Column="0"/>
+            <TextBox HorizontalAlignment="Right" Name="txtClassName" Margin="5" Width="354" Grid.ColumnSpan="2" Text="UsingReflaction.TestEntities.Customer"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0" Height="30">
+            <Button Content="Search" Width="75" Name="btnSearch" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnSearch_Click" Height="20"/>
+        </Grid>
+        <!--<Finished First row >-->
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Namespace:" HorizontalAlignment="Left" Width="80" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+            <TextBox Name="txbNamespace" HorizontalAlignment="Left" Width="380" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+
+            <TextBlock Text="Class Name:" HorizontalAlignment="Left" Width="80" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+            <TextBox Name="txbClassName" HorizontalAlignment="Left" Width="380" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+
+            <TextBlock Text="Full Name:" HorizontalAlignment="Left" Width="80" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="txbFullName" HorizontalAlignment="Left" Width="380" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+
+            <TextBlock Text="Assambly:" HorizontalAlignment="Left" Width="80" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="txbAssambly" HorizontalAlignment="Left" Width="380" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
+
+            <TextBlock Text="Attributes:" HorizontalAlignment="Left" Width="80" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="txbAttributes" HorizontalAlignment="Left" Width="380" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
+
+            <TextBlock Text="Base Type:" HorizontalAlignment="Left" Width="80" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="txbBaseType" HorizontalAlignment="Left" Width="380" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
+
+            <TextBlock Text="Module:" HorizontalAlignment="Left" Width="80" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="txbModule" HorizontalAlignment="Left" Width="380" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
+        </Grid>
+        <!--<Finished Second row >-->
+        <Grid  Grid.Column="0" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Properties: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+            <DataGrid Height="Auto" Name="dgProperties" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" VerticalAlignment="Stretch" Margin="0,0,15,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding PropertyName}" Header="Property name" />
+                    <DataGridTextColumn Binding="{Binding PropertyType}" Header="Property type" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--<Finished Third row >-->
+        <Grid  Grid.Column="0" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Fields: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+            <DataGrid Height="Auto" Name="dgFields" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FieldName}" Header="Field name" />
+                    <DataGridTextColumn Binding="{Binding FieldType}" Header="Field type" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--<Finished Third row >-->
+        <Grid  Grid.Column="0" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Methods: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+            <DataGrid Height="Auto" Name="dgMethods" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding MethodName}" Header="Method name" />
+                    <DataGridTextColumn Binding="{Binding ParametersTypeName}" Header="Parameters" />
+                    <DataGridTextColumn Binding="{Binding ReturnType}" Header="Return type" />
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button>Izvrsi metod</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--<Finished Forth row >-->
+        <Grid  Grid.Column="0" Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Constructors: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+            <DataGrid Height="Auto" Name="dgConstructors" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ConstructorName}" Header="Constructor name" />
+                    <DataGridTextColumn Binding="{Binding ParametersTypeName}" Header="Parameters" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--<Finished Fifth row >-->
+        <Grid  Grid.Column="0" Grid.Row="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Events: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+            <DataGrid Height="Auto" Name="dgEvents" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding EventName}" Header="Event name" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
