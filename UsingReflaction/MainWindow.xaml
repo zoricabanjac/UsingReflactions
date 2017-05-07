@@ -1,10 +1,12 @@
 ﻿<Window x:Class="UsingReflaction.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control ="clr-namespace:UsingReflaction.UserControls"
         Title="MainWindow" Height="auto" Width="1000">
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="900"></ColumnDefinition>
+            <ColumnDefinition Width="800"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -25,8 +27,9 @@
             <Label Content="Enter class name: " Name="lblClassName" HorizontalAlignment="Left" Grid.Column="0"/>
             <TextBox HorizontalAlignment="Right" Name="txtClassName" Margin="5" Width="354" Grid.ColumnSpan="2" Text="UsingReflaction.TestEntities.Customer"/>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="0">
-            <Button Content="Search" Width="75" Name="btnSearch" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnSearch_Click" Height="20"/>
+        <Grid Grid.Column="1" Grid.Row="0" Margin="5">
+            <Button Content="Make a customer " Width="75" Name="btnNewCustomer" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnNewCustomer_Click" Height="20"/>
+            <Button Content="Search" Width="75" Name="btnSearch" VerticalAlignment="Center" HorizontalAlignment="Right" Margin ="0" Click="btnSearch_Click" Height="20"/>
         </Grid>
         <!--<Finished First row >-->
         <GroupBox Grid.Column="0" Grid.Row="1" Margin="5">
@@ -73,6 +76,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -91,9 +95,12 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-                    
+
                     <StackPanel  Grid.Column="0" Grid.Row="1" Name="stpProperties" Margin="5">
                         <TextBlock Text="Get/set values: " Width="75" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Name="stpPropertiesDynamic" Height="200">
+
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -101,6 +108,7 @@
             <TabItem HorizontalAlignment="Left" Header="Field">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
@@ -123,8 +131,11 @@
                         </DataGrid>
                     </Grid>
 
-                    <StackPanel Grid.Column="0" Grid.Row="1" Name="stpFields" Margin="5">
+                    <StackPanel Grid.Column="0" Grid.Row="1" Name="stpFields" Margin="5" />
+                    <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Name="stpFieldsDynamic" Height="500">
+
                     </StackPanel>
+
                 </Grid>
             </TabItem>
             <!--<Finished Third row >-->
@@ -134,23 +145,31 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Methods: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
-                    <DataGrid Height="Auto" Name="dgMethods" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding MethodName}" Header="Method name" />
-                            <DataGridTextColumn Binding="{Binding ParametersTypeName}" Header="Parameters" />
-                            <DataGridTextColumn Binding="{Binding ReturnType}" Header="Return type" />
-                            <DataGridTemplateColumn Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button>Izvrsi metod</Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Methods: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+                        <DataGrid Height="Auto" Name="dgMethods" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding MethodName}" Header="Method name" />
+                                <DataGridTextColumn Binding="{Binding ParametersTypeName}" Header="Parameters" />
+                                <DataGridTextColumn Binding="{Binding ReturnType}" Header="Return type" />
+                                <DataGridTemplateColumn Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button>Izvrsi metod</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Name="stpMethodsDynamic" Height="500" />
                 </Grid>
             </TabItem>
+
             <!--<Finished Forth row >-->
             <TabItem Header="Constructor">
                 <Grid>

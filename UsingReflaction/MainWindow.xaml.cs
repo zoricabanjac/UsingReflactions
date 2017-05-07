@@ -25,31 +25,15 @@ namespace UsingReflaction
     {
         Customer myCustomer;
 
+        MyClassInfo myClass;
         public MainWindow()
         {
             InitializeComponent();
-
-            List<Order> orders = new List<Order>();
-            Order order = new Order(1, "banana", 1.5);
-            Order order1 = new Order(2, "ananas", 2);
-            orders.Add(order);
-            orders.Add(order1);
-
-            myCustomer = new Customer("Zorica", "Banjac", orders.ToArray());
-            myCustomer.EmailAddress = "zorica.banjac@gmail.com";
-            myCustomer.isPrivileged = true;
-
-            var address = new Customer.Address();
-            address.Street = "M.Dakica 47";
-            address.City = "Ruma";
-            address.Zip = "22400";
-            address.State = "Serbia";
-            myCustomer.MailingAddress = address;
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            MyClassInfo myClass = new MyClassInfo();
+            myClass = new MyClassInfo();
             Type type = GetType(txtClassName.Text);
 
             myClass.ClassName = type.Name;
@@ -73,20 +57,13 @@ namespace UsingReflaction
             myClass.Module = type.Module.Name;
             txbModule.Text = myClass.Module;
 
-            //List<MyNestedTypeInfo> nestedList = new List<MyNestedTypeInfo>();
-            //foreach (Type nestedType in type.GetNestedTypes())
-            //{
-            //    nestedList.Add(new MyNestedTypeInfo(nestedType.ToString()));
-            //}
-            //myClass.NestedTupesList = nestedList;
-
             List<MyFieldInfo> myFields = new List<MyFieldInfo>();
             foreach (FieldInfo info in type.GetFields())
             {
                 string infoType = (((FieldInfo)(info)).FieldType).FullName;
                 string infoName = ((FieldInfo)(info)).Name;
 
-                MakeLabelsAndTextBoxes(info, stpFields);
+                DesignControls(info, stpFieldsDynamic);
 
                 myFields.Add(new MyFieldInfo(info, infoName, infoType, info.MemberType));
             }
@@ -96,8 +73,9 @@ namespace UsingReflaction
             foreach (PropertyInfo info in type.GetProperties())
             {
                 myProperties.Add(new MyPropertyInfo(info, info.MemberType, info.PropertyType.FullName, ((MemberInfo)(info)).Name));
-                MakeLabelsAndTextBoxes(info, stpProperties);
+                DesignControls(info, stpPropertiesDynamic);
             }
+
             myClass.PropertiesList = myProperties;
 
             List<MyConstructorInfo> myConstructors = new List<MyConstructorInfo>();
@@ -115,6 +93,7 @@ namespace UsingReflaction
             }
             myClass.ConstructorsList = myConstructors;
 
+            dynamic result = null;
             List<MyMethodInfo> myMethods = new List<MyMethodInfo>();
             foreach (MethodInfo info in type.GetMethods())
             {
@@ -125,8 +104,13 @@ namespace UsingReflaction
                 foreach (ParameterInfo pParameter in info.GetParameters())
                 {
                     parameters.Add(new MyParameterInfo(pParameter.ParameterType.Name, pParameter.Name));
+                    DesignControlsForMathodParameters(info, pParameter, stpMethodsDynamic);
                 }
 
+                object classInstance = Activator.CreateInstance(type, null);
+
+                var parametersArray = parameters.Select(it => it.ParameterName).ToArray();
+                result = info.Invoke(classInstance, parameters.Count == 0 ? null : parametersArray);
                 myMethods.Add(new MyMethodInfo(info.MemberType, info, returntype, name, parameters));
             }
 
@@ -147,12 +131,18 @@ namespace UsingReflaction
             dgEvents.ItemsSource = myClass.EventsList;
         }
 
-        private void MakeLabelsAndTextBoxes(MemberInfo info, StackPanel stackPanel)
+        private void DesignControlsForMathodParameters(MethodInfo info, ParameterInfo parameter, StackPanel stackPanelInfo)
         {
-            Label label = new Label();
-            label.Content = ((MemberInfo)(info)).Name;
-            stackPanel.Children.Add(label);
+            if (parameter != null)
+            {
 
+                UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo, myCustomer);
+                stackPanelInfo.Children.Add(control);
+            }
+        }
+
+        private void DesignControls(MemberInfo info, StackPanel stackPanelInfo)
+        {
             FieldInfo fieldInfo = null;
             string fullName = null;
             PropertyInfo propertyInfo = null;
@@ -167,166 +157,22 @@ namespace UsingReflaction
                 fullName = propertyInfo.PropertyType.FullName;
             }
 
-            if (string.Equals(fullName, "System.String"))
+            if (string.Equals(fullName, "System.String") || !fullName.Contains("System"))
             {
-                TextBox textBox = new TextBox();
-                textBox.Name = "txb" + ((MemberInfo)(info)).Name;
-                stackPanel.Children.Add(textBox);
-
-                Button getButton = new Button();
-                getButton.Content = "Get value";
-                getButton.Name = "btn" + ((MemberInfo)(info)).Name;
-                getButton.Width = 75;
-                getButton.Height = 20;
-                getButton.HorizontalAlignment = HorizontalAlignment.Center;
-                getButton.Click += new RoutedEventHandler(getButton_Click);
-                stackPanel.Children.Add(getButton);
-
-                if (fullName.Contains("System"))
-                {
-                    Button setButton = new Button();
-                    setButton.Content = "Set value";
-                    setButton.Name = "btn" + ((MemberInfo)(info)).Name;
-                    setButton.Width = 75;
-                    setButton.Height = 20;
-                    setButton.HorizontalAlignment = HorizontalAlignment.Center;
-                    setButton.Click += new RoutedEventHandler(setButton_Click);
-                    stackPanel.Children.Add(setButton);
-                }
+                UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo, myCustomer);
+                stackPanelInfo.Children.Add(control);
             }
-            else if (string.Equals(fullName, "System.Boolean"))
+
+            if (string.Equals(fullName, "System.Boolean"))
             {
-                CheckBox checkBox= new CheckBox();
-                checkBox.Name = "chk" + ((MemberInfo)(info)).Name;
-                checkBox.Checked += new RoutedEventHandler(getCheckbox_Click);
-                stackPanel.Children.Add(checkBox);    
-            }           
+                UserControls.UserControlForBool control = new UserControls.UserControlForBool(info, stackPanelInfo, myCustomer);
+                stackPanelInfo.Children.Add(control);
+            }
         }
 
         private void getCheckbox_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
-        }
-
-        private void setButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            string clearName = button.Name.Substring(3);
-
-            MemberInfo info = myCustomer.GetType().FindMembers(MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance, new MemberFilter(DelegateToSearchCriteria), clearName).FirstOrDefault();
-            foreach (object child in stpProperties.Children)
-            {
-                if (child is TextBox)
-                {
-                    TextBox textBox = child as TextBox;
-                    if (textBox.Name.Contains(clearName))
-                    {
-                        PropertyInfo propertyInfo = info as PropertyInfo;
-                        propertyInfo.SetValue(myCustomer, textBox.Text);
-                    }
-                }
-            }
-        }
-
-        private void getButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            string clearName = button.Name.Substring(3);
-
-            MemberInfo info = myCustomer.GetType().FindMembers(MemberTypes.Property | MemberTypes.Field, BindingFlags.Public | BindingFlags.Instance, new MemberFilter(DelegateToSearchCriteria), clearName).FirstOrDefault();
-            foreach (object child in stpProperties.Children)
-            {
-                if (child is TextBox)
-                {
-                    TextBox textBox = child as TextBox;
-                    if (textBox.Name.Contains(clearName))
-                    {
-                        if (info is PropertyInfo)
-                        {
-                            PropertyInfo propertyInfo = info as PropertyInfo;
-                            {
-                                if (propertyInfo.PropertyType.FullName.Contains("System"))
-                                {
-                                    textBox.Text = propertyInfo.GetValue(myCustomer).ToString();
-                                }
-                                else
-                                {
-                                    textBox.Text = GetPropertyValue(myCustomer, clearName).ToString();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            FieldInfo fieldInfo = info as FieldInfo;
-                            {
-                                if (fieldInfo.FieldType.FullName.Contains("System"))
-                                {
-                                    textBox.Text = fieldInfo.GetValue(myCustomer).ToString();
-                                }
-                                else
-                                {
-                                    //extBox.Text = myCustomer, clearName).ToString();
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (child is CheckBox)
-                {
-                    CheckBox chkbox = child as CheckBox;
-
-                    if (chkbox.Name.Contains(clearName))
-                    {
-                        if (info is PropertyInfo)
-                        {
-                            PropertyInfo propertyInfo = info as PropertyInfo;
-                            {
-                                if (propertyInfo.PropertyType.FullName.Contains("System"))
-                                {
-                                    chkbox.IsChecked = (bool)propertyInfo.GetValue(myCustomer);
-                                }
-                                else
-                                {
-                                    //textBox.Text = GetPropertyValue(myCustomer, clearName).ToString();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            FieldInfo fieldInfo = info as FieldInfo;
-                            {
-                                if (fieldInfo.FieldType.FullName.Contains("System"))
-                                {
-                                    chkbox.IsChecked = (bool)fieldInfo.GetValue(myCustomer);
-                                }
-                                else
-                                {
-                                    //extBox.Text = myCustomer, clearName).ToString();
-                                }
-                            }
-                        }
-
-                    }
-
-                }
-            }
-        }
-
-        public object GetPropertyValue(object obj, string propertyName)
-        {
-            foreach (var prop in propertyName.Split('.').Select(s => obj.GetType().GetProperty(s)))
-                obj = prop.GetValue(obj, null);
-
-            return obj;
-        }
-
-
-        private bool DelegateToSearchCriteria(MemberInfo objmemberInfo, object objSearch)
-        {
-            if (objmemberInfo.Name.ToString() == objSearch.ToString())
-                return true;
-            else
-                return false;
         }
 
         public static Type GetType(string typeName)
@@ -340,6 +186,26 @@ namespace UsingReflaction
                     return type;
             }
             return null;
+        }
+
+        private void btnNewCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            List<Order> orders = new List<Order>();
+            Order order = new Order(1, "banana", 1.5);
+            Order order1 = new Order(2, "ananas", 2);
+            orders.Add(order);
+            orders.Add(order1);
+
+            myCustomer = new Customer("Zorica", "Banjac", orders.ToArray());
+            myCustomer.EmailAddress = "zorica.banjac@gmail.com";
+            myCustomer.isPrivileged = true;
+
+            var address = new Customer.Address();
+            address.Street = "M.Dakica 47";
+            address.City = "Ruma";
+            address.Zip = "22400";
+            address.State = "Serbia";
+            myCustomer.MailingAddress = address;
         }
     }
 }

@@ -53,6 +53,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\UserControlBase.cs" />
+    <Compile Include="UserControls\UserControlForBool.xaml.cs">
+      <DependentUpon>UserControlForBool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlForString.xaml.cs">
+      <DependentUpon>UserControlForString.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,7 +73,6 @@
     <Compile Include="Entities\MyEventInfo.cs" />
     <Compile Include="Entities\MyFieldInfo.cs" />
     <Compile Include="Entities\MyMethodInfo.cs" />
-    <Compile Include="Entities\MyNestedTypeInfo.cs" />
     <Compile Include="Entities\MyParameterInfo.cs" />
     <Compile Include="Entities\MyPropertyInfo.cs" />
     <Compile Include="TestEntities\Customer.cs" />
@@ -76,6 +82,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\UserControlForBool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlForString.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
