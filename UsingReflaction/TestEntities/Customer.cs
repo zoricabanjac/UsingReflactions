@@ -11,7 +11,13 @@ namespace UsingReflaction.TestEntities
         public struct Address
         {
             public string Street, City, State, Zip;
+            public override string ToString()
+            {
+                return Street + ", " + City + ", " + State + ", " + Zip;
+            }
         }
+
+        public bool isPrivileged;
 
         public string EmailAddress { get; set; }
         public Address MailingAddress { get; set; }
