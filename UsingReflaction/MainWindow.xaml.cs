@@ -103,14 +103,28 @@ namespace UsingReflaction
                 List<MyParameterInfo> parameters = new List<MyParameterInfo>();
                 foreach (ParameterInfo pParameter in info.GetParameters())
                 {
-                    parameters.Add(new MyParameterInfo(pParameter.ParameterType.Name, pParameter.Name));
-                    DesignControlsForMathodParameters(info, pParameter, stpMethodsDynamic);
+                    MyParameterInfo parameter = new MyParameterInfo(pParameter.ParameterType.Name, pParameter.Name);
+                    parameters.Add(parameter);
+                    DesignControlForMathodParameter(info, pParameter, stpMethodsDynamic, parameter);
                 }
+
+                //Button getButton = new Button();
+                //getButton.Content = "Calculate";
+                //getButton.Name = "btnCalculate";
+                //getButton.Width = 75;
+                //getButton.Height = 20;
+                //getButton.HorizontalAlignment = HorizontalAlignment.Center;
+                //getButton.Click += new RoutedEventHandler(btnCalculate_Click);
+                //stpMethodsDynamic.Children.Add(getButton);
 
                 object classInstance = Activator.CreateInstance(type, null);
 
-                var parametersArray = parameters.Select(it => it.ParameterName).ToArray();
-                result = info.Invoke(classInstance, parameters.Count == 0 ? null : parametersArray);
+                if (parameters.All(it => it.ParameterType.Contains("String")))
+                {
+
+                    //object[] args = {}
+                    //result = info.Invoke(classInstance, parameters.Count == 0 ? null : parametersArray);
+                }
                 myMethods.Add(new MyMethodInfo(info.MemberType, info, returntype, name, parameters));
             }
 
@@ -131,12 +145,16 @@ namespace UsingReflaction
             dgEvents.ItemsSource = myClass.EventsList;
         }
 
-        private void DesignControlsForMathodParameters(MethodInfo info, ParameterInfo parameter, StackPanel stackPanelInfo)
+        private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
-            if (parameter != null)
-            {
+           //
+        }
 
-                UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo, myCustomer);
+        private void DesignControlForMathodParameter(MethodInfo info, ParameterInfo parameterInfo, StackPanel stackPanelInfo, MyParameterInfo myParameterInfo)
+        {
+            if (string.Equals(myParameterInfo.ParameterType, "System.String"))
+            {
+                UserControls.UserControlForStringParameter control = new UserControls.UserControlForStringParameter(info, stackPanelInfo, myCustomer, myParameterInfo);
                 stackPanelInfo.Children.Add(control);
             }
         }

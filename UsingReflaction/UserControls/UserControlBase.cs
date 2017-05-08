@@ -47,6 +47,7 @@ namespace UsingReflaction.UserControls
                 return memberInformation;
             }
         }
+
         private MethodInfo methodInformation;
         public MethodInfo MethodInformation
         {
