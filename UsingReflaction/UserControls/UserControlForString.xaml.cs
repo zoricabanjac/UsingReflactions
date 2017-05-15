@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UsingReflaction.Entities;
 using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.UserControls
@@ -35,9 +36,8 @@ namespace UsingReflaction.UserControls
             InitializeComponent();    
         }
 
-        public UserControlForString(MemberInfo info, StackPanel stackPanelInfo, Customer myCustomer) : this()
+        public UserControlForString(MemberInfo info, StackPanel stackPanelInfo) : this()
         {
-            this.MyCustomer = myCustomer;
             this.MemberInformation = info;
             this.StackPanelInfo = stackPanelInfo;
 
@@ -51,44 +51,39 @@ namespace UsingReflaction.UserControls
 
         private void btnGetValue_Click(object sender, RoutedEventArgs e)
         {
-            // MemberInfo info = MyCustomer.GetType().FindMembers(MemberTypes.Property | MemberTypes.Field, BindingFlags.Public | BindingFlags.Instance, new MemberFilter(DelegateToSearchCriteria), Name).FirstOrDefault();
-            // if (info is PropertyInfo)
             if (PropertyInformation != null)
             {
                 if (PropertyInformation.PropertyType.FullName.Contains("System"))
                 {
-                    txbTextBox.Text = PropertyInformation.GetValue(MyCustomer).ToString();
+                    txbTextBox.Text = PropertyInformation.GetValue(DataHolder.SelectedObject).ToString();
                 }
                 else
                 {
-                    txbTextBox.Text = GetPropertyValue(MyCustomer, NameAbr).ToString();
+                    txbTextBox.Text = GetPropertyValue(DataHolder.SelectedObject, NameAbr).ToString();
                 }
             }
             else if (FieldInformation != null)
             {
                 if (FieldInformation.FieldType.FullName.Contains("System"))
                 {
-                    txbTextBox.Text = FieldInformation.GetValue(MyCustomer).ToString();
+                    txbTextBox.Text = FieldInformation.GetValue(DataHolder.SelectedObject).ToString();
                 }
                 else
                 {
-                    txbTextBox.Text = GetPropertyValue(MyCustomer, NameAbr).ToString();
+                    txbTextBox.Text = GetPropertyValue(DataHolder.SelectedObject, NameAbr).ToString();
                 }
             }
         }
 
         private void btnSetValue_Click(object sender, RoutedEventArgs e)
         {
-            //MemberInfo info = MyCustomer.GetType().FindMembers(MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance, new MemberFilter(DelegateToSearchCriteria), Name).FirstOrDefault();
-
-            // PropertyInfo propertyInfo = info as PropertyInfo;
             if (PropertyInformation != null)
             {
-                PropertyInformation.SetValue(MyCustomer, txbTextBox.Text);
+                PropertyInformation.SetValue(DataHolder.SelectedObject, txbTextBox.Text);
             }
             else if (FieldInformation != null)
             {
-                FieldInformation.SetValue(MyCustomer, txbTextBox.Text);
+                FieldInformation.SetValue(DataHolder.SelectedObject, txbTextBox.Text);
             }
         }
 

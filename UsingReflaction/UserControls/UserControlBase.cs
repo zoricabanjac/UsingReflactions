@@ -63,11 +63,7 @@ namespace UsingReflaction.UserControls
         }
 
         public FieldInfo FieldInformation { get; set; }
-
         public PropertyInfo PropertyInformation { get; set; }
-
         public StackPanel StackPanelInfo { get; set; }
-
-        public Customer MyCustomer { get; set; }
     }
 }

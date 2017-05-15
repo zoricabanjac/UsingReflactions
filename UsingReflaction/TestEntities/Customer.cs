@@ -24,6 +24,13 @@ namespace UsingReflaction.TestEntities
         public List<Order> Orders = new List<Order>();
 
         public Customer() { }
+
+        public Customer(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
         public Customer(string firstName, string lastName, params Order[] orders)
         {
             FirstName = firstName;
@@ -34,7 +41,13 @@ namespace UsingReflaction.TestEntities
         public delegate void PaymentReceivedDelegate(decimal amount);
         public event PaymentReceivedDelegate PaymentReceived;
 
-        public void SendEmail(string message) { }
-        public void SendMessage(string message, int numberOfReceivers) { }
+        public string SendEmail(string message) 
+        {
+            return message + " sent"; 
+        }
+        public string SendMessage(string message, int numberOfReceivers) 
+        {
+            return message + " sent to " + numberOfReceivers + "receivers";
+        }
     }
 }

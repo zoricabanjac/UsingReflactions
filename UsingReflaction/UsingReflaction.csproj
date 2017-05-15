@@ -55,9 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entities\DataHolder.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="UserControls\MethodContainer.xaml.cs">
+      <DependentUpon>MethodContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserControlBase.cs" />
     <Compile Include="UserControls\UserControlForBool.xaml.cs">
       <DependentUpon>UserControlForBool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlForIntParameter.xaml.cs">
+      <DependentUpon>UserControlForIntParameter.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserControlForString.xaml.cs">
       <DependentUpon>UserControlForString.xaml</DependentUpon>
@@ -87,7 +95,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\MethodContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UserControlForBool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlForIntParameter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

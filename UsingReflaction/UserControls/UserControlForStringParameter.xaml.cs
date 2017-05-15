@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UsingReflaction.Entities;
+using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.UserControls
 {
@@ -20,23 +23,22 @@ namespace UsingReflaction.UserControls
     /// </summary>
     public partial class UserControlForStringParameter : UserControl
     {
-        private System.Reflection.MethodInfo info;
-        private StackPanel stackPanelInfo;
-        private TestEntities.Customer myCustomer;
-        private Entities.MyParameterInfo myParameterInfo;
-
+        public string ParameterValue
+        {
+            get
+            {
+                return txbTextBox.Text;
+            }
+        }
         public UserControlForStringParameter()
         {
             InitializeComponent();
         }
 
-        public UserControlForStringParameter(System.Reflection.MethodInfo info, StackPanel stackPanelInfo, TestEntities.Customer myCustomer, Entities.MyParameterInfo myParameterInfo)
+        public UserControlForStringParameter(MyParameterInfo parameter)
+            : this()
         {
-            // TODO: Complete member initialization
-            this.info = info;
-            this.stackPanelInfo = stackPanelInfo;
-            this.myCustomer = myCustomer;
-            this.myParameterInfo = myParameterInfo;
+            lblParameterName.Text = parameter.ParameterName;
         }
     }
 }

@@ -9,14 +9,15 @@ namespace UsingReflaction.Entities
 {
     public class MyFieldInfo
     {
-        public FieldInfo FieldFullName { get; set; }
+        public FieldInfo FieldInformation { get; set; }
         public string FieldName { get; set; }
         public string FieldType { get; set; }
         public MemberTypes MemberType { get; set; }
+        public FieldInfo FieldInfo { get; set; }
 
-        public MyFieldInfo(FieldInfo fieldFullName, string fieldName, string fieldType, MemberTypes memberType)
+        public MyFieldInfo(FieldInfo fieldInformation, string fieldName, string fieldType, MemberTypes memberType)
         {
-            FieldFullName = fieldFullName;
+            FieldInformation = fieldInformation;
             FieldName = fieldName;
             FieldType = fieldType;
             MemberType = memberType;

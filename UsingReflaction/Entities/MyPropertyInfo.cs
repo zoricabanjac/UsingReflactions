@@ -11,12 +11,12 @@ namespace UsingReflaction.Entities
     {
         public string PropertyName { get; set; }
         public string PropertyType { get; set; }
-        public PropertyInfo PropertyInfo { get; set; }
+        public PropertyInfo PropertyInformation { get; set; }
         public MemberTypes MemberType { get; set; }
-
-        public MyPropertyInfo(PropertyInfo propertyInfo, MemberTypes memberType, string propertyType, string propertyName)
+      
+        public MyPropertyInfo(PropertyInfo propertyInformation, MemberTypes memberType, string propertyType, string propertyName)
         {
-            PropertyInfo = propertyInfo;
+            PropertyInformation = propertyInformation;
             MemberType = memberType;
             PropertyName = propertyName;
             PropertyType = propertyType;

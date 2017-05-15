@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UsingReflaction.Entities;
 using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.UserControls
@@ -33,13 +34,13 @@ namespace UsingReflaction.UserControls
             InitializeComponent();
         }
 
-        public UserControlForBool(MemberInfo info, StackPanel stackPanelInfo, Customer myCustomer) : this()
+        public UserControlForBool(MemberInfo info, StackPanel stackPanelInfo) : this()
         {
-            this.MyCustomer = myCustomer;
             this.MemberInformation = info;
             this.StackPanelInfo = stackPanelInfo;
             lblLabel.Text = NameAbr;
-            chkCheckBox.IsChecked = MyCustomer.isPrivileged;
+           
+            //chkCheckBox.IsChecked = myobj.isPrivileged;
         }
 
         public object GetPropertyValue(object obj, string propertyName)
@@ -55,11 +56,11 @@ namespace UsingReflaction.UserControls
         {
             if (PropertyInformation != null)
             {
-                PropertyInformation.SetValue(MyCustomer, chkCheckBox.IsChecked);
+                PropertyInformation.SetValue(DataHolder.SelectedObject, chkCheckBox.IsChecked);
             }
             else if (FieldInformation != null)
             {
-                FieldInformation.SetValue(MyCustomer, chkCheckBox.IsChecked);
+                FieldInformation.SetValue(DataHolder.SelectedObject, chkCheckBox.IsChecked);
             }
         }
 

@@ -17,6 +17,7 @@ namespace UsingReflaction.Entities
         public TypeAttributes Attributes { get; set; }
         public string BaseType { get; set; }
         public string Module { get; set; }
+
         public List<MyConstructorInfo> ConstructorsList { get; set; }
         public List<MyPropertyInfo> PropertiesList { get; set; }
         public List<MyFieldInfo> FieldsList { get; set; }

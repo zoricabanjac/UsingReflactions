@@ -23,9 +23,6 @@ namespace UsingReflaction
     /// </summary>
     public partial class MainWindow : Window
     {
-        Customer myCustomer;
-
-        MyClassInfo myClass;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,8 +30,8 @@ namespace UsingReflaction
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            myClass = new MyClassInfo();
-            Type type = GetType(txtClassName.Text);
+            MyClassInfo myClass = new MyClassInfo();
+            Type type = GetType(DataHolder.SelectedObject.ToString());
 
             myClass.ClassName = type.Name;
             txbClassName.Text = myClass.ClassName;
@@ -78,6 +75,7 @@ namespace UsingReflaction
 
             myClass.PropertiesList = myProperties;
 
+
             List<MyConstructorInfo> myConstructors = new List<MyConstructorInfo>();
             foreach (ConstructorInfo info in type.GetConstructors())
             {
@@ -89,11 +87,11 @@ namespace UsingReflaction
                     parameters.Add(new MyParameterInfo(pParameter.ParameterType.Name, pParameter.Name));
                 }
 
-                myConstructors.Add(new MyConstructorInfo(info.MemberType, info, name, parameters));
+                myConstructors.Add(new MyConstructorInfo(info.MemberType, info, name, parameters, DataHolder.SelectedObject));
             }
+
             myClass.ConstructorsList = myConstructors;
 
-            dynamic result = null;
             List<MyMethodInfo> myMethods = new List<MyMethodInfo>();
             foreach (MethodInfo info in type.GetMethods())
             {
@@ -105,27 +103,9 @@ namespace UsingReflaction
                 {
                     MyParameterInfo parameter = new MyParameterInfo(pParameter.ParameterType.Name, pParameter.Name);
                     parameters.Add(parameter);
-                    DesignControlForMathodParameter(info, pParameter, stpMethodsDynamic, parameter);
                 }
 
-                //Button getButton = new Button();
-                //getButton.Content = "Calculate";
-                //getButton.Name = "btnCalculate";
-                //getButton.Width = 75;
-                //getButton.Height = 20;
-                //getButton.HorizontalAlignment = HorizontalAlignment.Center;
-                //getButton.Click += new RoutedEventHandler(btnCalculate_Click);
-                //stpMethodsDynamic.Children.Add(getButton);
-
-                object classInstance = Activator.CreateInstance(type, null);
-
-                if (parameters.All(it => it.ParameterType.Contains("String")))
-                {
-
-                    //object[] args = {}
-                    //result = info.Invoke(classInstance, parameters.Count == 0 ? null : parametersArray);
-                }
-                myMethods.Add(new MyMethodInfo(info.MemberType, info, returntype, name, parameters));
+                myMethods.Add(new MyMethodInfo(info.MemberType, info, returntype, name, parameters, DataHolder.SelectedObject));
             }
 
             myClass.MethodsList = myMethods;
@@ -145,18 +125,13 @@ namespace UsingReflaction
             dgEvents.ItemsSource = myClass.EventsList;
         }
 
-        private void btnCalculate_Click(object sender, RoutedEventArgs e)
-        {
-           //
-        }
 
-        private void DesignControlForMathodParameter(MethodInfo info, ParameterInfo parameterInfo, StackPanel stackPanelInfo, MyParameterInfo myParameterInfo)
+        private void DesignControlForMethod(Object obj, StackPanel stackPanel, Helper.MethodType methodInfo)
         {
-            if (string.Equals(myParameterInfo.ParameterType, "System.String"))
-            {
-                UserControls.UserControlForStringParameter control = new UserControls.UserControlForStringParameter(info, stackPanelInfo, myCustomer, myParameterInfo);
-                stackPanelInfo.Children.Add(control);
-            }
+            stackPanel.Children.Clear();
+
+            UserControls.MethodContainer container = new UserControls.MethodContainer(obj, methodInfo);
+            stackPanel.Children.Add(container);
         }
 
         private void DesignControls(MemberInfo info, StackPanel stackPanelInfo)
@@ -177,20 +152,15 @@ namespace UsingReflaction
 
             if (string.Equals(fullName, "System.String") || !fullName.Contains("System"))
             {
-                UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo, myCustomer);
+                UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
             }
 
             if (string.Equals(fullName, "System.Boolean"))
             {
-                UserControls.UserControlForBool control = new UserControls.UserControlForBool(info, stackPanelInfo, myCustomer);
+                UserControls.UserControlForBool control = new UserControls.UserControlForBool(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
             }
-        }
-
-        private void getCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         public static Type GetType(string typeName)
@@ -208,22 +178,24 @@ namespace UsingReflaction
 
         private void btnNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            List<Order> orders = new List<Order>();
-            Order order = new Order(1, "banana", 1.5);
-            Order order1 = new Order(2, "ananas", 2);
-            orders.Add(order);
-            orders.Add(order1);
+            DataHolder.CreateTestCustomer();
+        }
 
-            myCustomer = new Customer("Zorica", "Banjac", orders.ToArray());
-            myCustomer.EmailAddress = "zorica.banjac@gmail.com";
-            myCustomer.isPrivileged = true;
+        private void btnNewPerson_Click(object sender, RoutedEventArgs e)
+        {
+            DataHolder.CreateTestPerson();
+        }
 
-            var address = new Customer.Address();
-            address.Street = "M.Dakica 47";
-            address.City = "Ruma";
-            address.Zip = "22400";
-            address.State = "Serbia";
-            myCustomer.MailingAddress = address;
+        private void btnSelect_Click(object sender, RoutedEventArgs e)
+        {
+            Object obj = ((Button)e.Source).DataContext;
+            DesignControlForMethod(obj, stpMethodsDynamic, Helper.MethodType.MethodType);
+        }
+
+        private void btnSelectConsturctor_Click(object sender, RoutedEventArgs e)
+        {
+            Object obj = ((Button)e.Source).DataContext;
+            DesignControlForMethod(obj, stpConstructorsDynamic, Helper.MethodType.ConstructorType);
         }
     }
 }

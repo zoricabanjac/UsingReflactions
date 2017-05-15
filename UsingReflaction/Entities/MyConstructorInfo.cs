@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.Entities
 {
@@ -13,6 +14,7 @@ namespace UsingReflaction.Entities
         public ConstructorInfo ConstructorInfo { get; set; }
         public string ConstructorName { get; set; }
         public List<MyParameterInfo> Parameters { get; set; }
+        public Object SelectedObject { get; set; }
 
         public string ParametersTypeName
         {
@@ -32,12 +34,13 @@ namespace UsingReflaction.Entities
             }
         }
 
-        public MyConstructorInfo(MemberTypes memberType, ConstructorInfo constructorInfo, string constructorName, List<MyParameterInfo> parameters)
+        public MyConstructorInfo(MemberTypes memberType, ConstructorInfo constructorInfo, string constructorName, List<MyParameterInfo> parameters, Object selectedObject)
         {
             MemberType = memberType;
             ConstructorInfo = constructorInfo;
             ConstructorName = constructorName;
             Parameters = parameters;
-        }
+            SelectedObject = selectedObject;
+        }    
     }
 }
