@@ -64,6 +64,7 @@ namespace UsingReflaction
 
                 myFields.Add(new MyFieldInfo(info, infoName, infoType, info.MemberType));
             }
+
             myClass.FieldsList = myFields;
 
             List<MyPropertyInfo> myProperties = new List<MyPropertyInfo>();
@@ -74,7 +75,6 @@ namespace UsingReflaction
             }
 
             myClass.PropertiesList = myProperties;
-
 
             List<MyConstructorInfo> myConstructors = new List<MyConstructorInfo>();
             foreach (ConstructorInfo info in type.GetConstructors())

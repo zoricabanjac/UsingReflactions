@@ -33,19 +33,20 @@ namespace UsingReflaction.UserControls
 
         public UserControlForString()
         {
-            InitializeComponent();    
+            InitializeComponent();
         }
 
-        public UserControlForString(MemberInfo info, StackPanel stackPanelInfo) : this()
+        public UserControlForString(MemberInfo info, StackPanel stackPanelInfo)
+            : this()
         {
             this.MemberInformation = info;
             this.StackPanelInfo = stackPanelInfo;
 
-            if(!TypeFullName.Contains("System"))
+            if (!TypeFullName.Contains("System"))
             {
                 btnSetValue.IsEnabled = false;
             }
-          
+
             lblLabel.Text = NameAbr;
         }
 

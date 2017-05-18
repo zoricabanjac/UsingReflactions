@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UsingReflaction.Entities;
 
 namespace UsingReflaction.UserControls
@@ -125,7 +115,7 @@ namespace UsingReflaction.UserControls
                 {
                     myConstructorInfo.ConstructorInfo.Invoke(myConstructorInfo.SelectedObject, myConstructorInfo.Parameters.Count == 0 ? null : args);
                 }
-            }         
+            }
         }
     }
 }
