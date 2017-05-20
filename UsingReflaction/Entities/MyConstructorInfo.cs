@@ -14,13 +14,12 @@ namespace UsingReflaction.Entities
         public ConstructorInfo ConstructorInfo { get; set; }
         public string ConstructorName { get; set; }
         public List<MyParameterInfo> Parameters { get; set; }
-        public Object SelectedObject { get; set; }
 
+        private string parametersTypeName;
         public string ParametersTypeName
         {
             get
             {
-                string parametersTypeName = null;
                 foreach (MyParameterInfo parameter in Parameters)
                 {
                     parametersTypeName += parameter.ParameterType + " " + parameter.ParameterName;
@@ -32,15 +31,19 @@ namespace UsingReflaction.Entities
 
                 return parametersTypeName;
             }
+
+            set
+            {
+                parametersTypeName = value;
+            }
         }
 
-        public MyConstructorInfo(MemberTypes memberType, ConstructorInfo constructorInfo, string constructorName, List<MyParameterInfo> parameters, Object selectedObject)
+        public MyConstructorInfo(MemberTypes memberType, ConstructorInfo constructorInfo, string constructorName, List<MyParameterInfo> parameters)
         {
             MemberType = memberType;
             ConstructorInfo = constructorInfo;
             ConstructorName = constructorName;
             Parameters = parameters;
-            SelectedObject = selectedObject;
         }    
     }
 }

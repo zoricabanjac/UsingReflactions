@@ -6,75 +6,97 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"></ColumnDefinition>
+            <ColumnDefinition Width="550"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="490">
+        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="1000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Content="Enter class name: " Name="lblClassName" HorizontalAlignment="Left" Grid.Column="0"/>
-            <TextBox HorizontalAlignment="Right" Name="txtClassName" Margin="5" Width="354" Grid.ColumnSpan="2" Text="UsingReflaction.TestEntities.Customer"/>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="0" Margin="5">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Make a customer " Width="100" Name="btnNewCustomer" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="5,0" Click="btnNewCustomer_Click" Height="20"/>
-                <Button Content="Make a person " Width="100" Name="btnNewPerson" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="5,0" Click="btnNewPerson_Click" Height="20"/>
-                <Button Content="Search" Width="75" Name="btnSearch" VerticalAlignment="Center" HorizontalAlignment="Right" Margin ="0" Click="btnSearch_Click" Height="20"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Enter class name:" Name="lblClassName" Margin="5" Width="100" Height="25" VerticalAlignment="Bottom" />
+                <TextBox Text="Enter new class" Name="txtClassName" Margin="5" Width="250" Height="25" VerticalAlignment="Bottom" />
+                <Button Content="Search" Name="btnSearch" Margin ="5" Width="75" Height="25" VerticalAlignment="Bottom" Click="btnSearch_Click" />
             </StackPanel>
         </Grid>
+        <Grid Grid.Column="1" Grid.Row="0" Margin="5">
+            <TextBlock Text="Variables:" Width="100" Height="25" VerticalAlignment="Bottom" />
+            <!--<StackPanel Orientation="Horizontal">
+                <Button Content="Make a customer " Width="100" Name="btnNewCustomer" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="5,0" Click="btnNewCustomer_Click" Height="20"/>
+                <Button Content="Make a person " Width="100" Name="btnNewPerson" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="5,0" Click="btnNewPerson_Click" Height="20"/>
+            </StackPanel>-->
+        </Grid>
         <!--<Finished First row >-->
-        <GroupBox Grid.Column="0" Grid.Row="1" Margin="5">
-            <Grid >
+        <GroupBox Grid.Column="0" Grid.Row="1" Margin="10">
+            <Grid Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height ="5" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Namespace:" HorizontalAlignment="Left" Width="80" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-                <TextBox Name="txbNamespace" HorizontalAlignment="Left" Width="380" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Namespace:" HorizontalAlignment="Left" Width="80" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="txbNamespace" HorizontalAlignment="Left" Width="400" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
 
-                <TextBlock Text="Class Name:" HorizontalAlignment="Left" Width="80" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
-                <TextBox Name="txbClassName" HorizontalAlignment="Left" Width="380" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Class Name:" HorizontalAlignment="Left" Width="80" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                <TextBox Name="txbClassName" HorizontalAlignment="Left" Width="400" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
 
-                <TextBlock Text="Full Name:" HorizontalAlignment="Left" Width="80" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="txbFullName" HorizontalAlignment="Left" Width="380" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Full Name:" HorizontalAlignment="Left" Width="80" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="txbFullName" HorizontalAlignment="Left" Width="400" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
 
-                <TextBlock Text="Assambly:" HorizontalAlignment="Left" Width="80" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="txbAssambly" HorizontalAlignment="Left" Width="380" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Assambly:" HorizontalAlignment="Left" Width="80" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="txbAssambly" HorizontalAlignment="Left" Width="400" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" />
 
-                <TextBlock Text="Attributes:" HorizontalAlignment="Left" Width="80" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="txbAttributes" HorizontalAlignment="Left" Width="380" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Attributes:" HorizontalAlignment="Left" Width="80" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="txbAttributes" HorizontalAlignment="Left" Width="400" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" />
 
-                <TextBlock Text="Base Type:" HorizontalAlignment="Left" Width="80" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="txbBaseType" HorizontalAlignment="Left" Width="380" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Base Type:" HorizontalAlignment="Left" Width="80" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="txbBaseType" HorizontalAlignment="Left" Width="400" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" />
 
-                <TextBlock Text="Module:" HorizontalAlignment="Left" Width="80" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="txbModule" HorizontalAlignment="Left" Width="380" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Text="Module:" HorizontalAlignment="Left" Width="80" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="txbModule" HorizontalAlignment="Left" Width="400" Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Grid.Row="1" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height ="5" />
+                    <RowDefinition Height ="Auto" />
+                    <RowDefinition Height ="5" />
+                </Grid.RowDefinitions>
+                <DataGrid Height="Auto" Name="dgVariables" AutoGenerateColumns="False" Grid.Row="1" HorizontalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" VerticalAlignment="Stretch" Margin="0,0,15,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding VariableName}" Header="Variable type" />
+                        <DataGridTextColumn Binding="{Binding VariableType}" Header="Variable name" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </GroupBox>
         <TabControl Grid.ColumnSpan="2" Grid.Row="2">
             <!--<Finished Second row >-->
-            <TabItem Header="Property">
+            <TabItem Header="Property" Name="tbProperty">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -108,8 +130,8 @@
                 </Grid>
             </TabItem>
             <!--<Finished Third row >-->
-            <TabItem HorizontalAlignment="Left" Header="Field">
-                <Grid>
+            <TabItem HorizontalAlignment="Left" Header="Field" Name="tbField">
+                <Grid>               
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -142,7 +164,7 @@
                 </Grid>
             </TabItem>
             <!--<Finished Third row >-->
-            <TabItem Header="Method">
+            <TabItem Header="Method" Name="tbMethod">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="700"></ColumnDefinition>
@@ -155,17 +177,15 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Methods: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
                         <DataGrid Height="Auto" Name="dgMethods" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                            <DataGrid.ItemContainerStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                </Style>
+                            </DataGrid.ItemContainerStyle>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding MethodName}" Header="Method name" />
                                 <DataGridTextColumn Binding="{Binding ParametersTypeName}" Header="Parameters" />
-                                <DataGridTextColumn Binding="{Binding ReturnType}" Header="Return type" />
-                                <DataGridTemplateColumn Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Name="btnSelect" Click="btnSelect_Click">Select</Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding ReturnType}" Header="Return type"  Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -174,7 +194,7 @@
             </TabItem>
 
             <!--<Finished Forth row >-->
-            <TabItem Header="Constructor">
+            <TabItem Header="Constructor" Name="tbConsturctor">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="700"></ColumnDefinition>
@@ -187,16 +207,14 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Constructors: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
                         <DataGrid Height="Auto" Name="dgConstructors" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" Margin="0,0,15,0">
+                            <DataGrid.ItemContainerStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="ConstuctorRow_DoubleClick"/>
+                                </Style>
+                            </DataGrid.ItemContainerStyle>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding ConstructorName}" Header="Constructor name" />
                                 <DataGridTextColumn Binding="{Binding ParametersTypeName}" Header="Parameters" Width="*"/>
-                                <DataGridTemplateColumn Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Name="btnSelectConstructor" Click="btnSelectConsturctor_Click">Select</Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -204,7 +222,7 @@
                 </Grid>
             </TabItem>
             <!--<Finished Fifth row >-->
-            <TabItem Header="Event">
+            <TabItem Header="Event" Name="tbEvent">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>

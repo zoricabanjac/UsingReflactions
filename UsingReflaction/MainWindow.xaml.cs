@@ -31,7 +31,11 @@ namespace UsingReflaction
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             MyClassInfo myClass = new MyClassInfo();
-            Type type = GetType(DataHolder.SelectedObject.ToString());
+            Type type = Helper.GetType(txtClassName.Text);
+            if(type == null)
+            {
+                return;
+            }
 
             myClass.ClassName = type.Name;
             txbClassName.Text = myClass.ClassName;
@@ -87,7 +91,7 @@ namespace UsingReflaction
                     parameters.Add(new MyParameterInfo(pParameter.ParameterType.Name, pParameter.Name));
                 }
 
-                myConstructors.Add(new MyConstructorInfo(info.MemberType, info, name, parameters, DataHolder.SelectedObject));
+               myConstructors.Add(new MyConstructorInfo(info.MemberType, info, name, parameters));
             }
 
             myClass.ConstructorsList = myConstructors;
@@ -105,7 +109,7 @@ namespace UsingReflaction
                     parameters.Add(parameter);
                 }
 
-                myMethods.Add(new MyMethodInfo(info.MemberType, info, returntype, name, parameters, DataHolder.SelectedObject));
+                myMethods.Add(new MyMethodInfo(info.MemberType, info, returntype, name, parameters));
             }
 
             myClass.MethodsList = myMethods;
@@ -124,7 +128,6 @@ namespace UsingReflaction
             dgConstructors.ItemsSource = myClass.ConstructorsList;
             dgEvents.ItemsSource = myClass.EventsList;
         }
-
 
         private void DesignControlForMethod(Object obj, StackPanel stackPanel, Helper.MethodType methodInfo)
         {
@@ -163,38 +166,25 @@ namespace UsingReflaction
             }
         }
 
-        public static Type GetType(string typeName)
-        {
-            var type = Type.GetType(typeName);
-            if (type != null) return type;
-            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                type = a.GetType(typeName);
-                if (type != null)
-                    return type;
-            }
-            return null;
-        }
-
         private void btnNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            DataHolder.CreateTestCustomer();
+            DataHolder.Instance.CreateTestCustomer();
         }
 
         private void btnNewPerson_Click(object sender, RoutedEventArgs e)
         {
-            DataHolder.CreateTestPerson();
+            DataHolder.Instance.CreateTestPerson();
         }
 
-        private void btnSelect_Click(object sender, RoutedEventArgs e)
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Object obj = ((Button)e.Source).DataContext;
+            Object obj = ((DataGridRow)(sender)).Item;
             DesignControlForMethod(obj, stpMethodsDynamic, Helper.MethodType.MethodType);
         }
 
-        private void btnSelectConsturctor_Click(object sender, RoutedEventArgs e)
+        private void ConstuctorRow_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Object obj = ((Button)e.Source).DataContext;
+            Object obj = ((DataGridRow)(sender)).Item;
             DesignControlForMethod(obj, stpConstructorsDynamic, Helper.MethodType.ConstructorType);
         }
     }

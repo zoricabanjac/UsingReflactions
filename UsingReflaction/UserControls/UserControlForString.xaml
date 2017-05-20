@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UsingReflaction.UserControls"
+             xmlns:data="clr-namespace:UsingReflaction.Entities"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="400" Height="50" Background="Azure" MinWidth="200">
     <Grid>
         <StackPanel Orientation="Horizontal">
             <TextBlock Name="lblLabel" Text="label" Width="100" Height="20"/>
             <TextBox Name="txbTextBox" HorizontalAlignment="Left" Width="150" Height="20"/>
-            <Button Content ="Get value" Width="75" Name="btnGetValue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnGetValue_Click" Height="20"/>
+            <Button Content ="Get value" Width="75" Name="btnGetValue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnGetValue_Click" Height="20" IsEnabled="{Binding Source={x:Static data:DataHolder.Instance}, Path = HasSelectedObject}" />
             <Button Content="Set value" Width="75" Name="btnSetValue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnSetValue_Click" Height="20"/>
         </StackPanel>     
     </Grid>

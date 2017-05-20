@@ -46,7 +46,7 @@ namespace UsingReflaction.UserControls
             {
                 btnSetValue.IsEnabled = false;
             }
-
+            
             lblLabel.Text = NameAbr;
         }
 
@@ -56,22 +56,22 @@ namespace UsingReflaction.UserControls
             {
                 if (PropertyInformation.PropertyType.FullName.Contains("System"))
                 {
-                    txbTextBox.Text = PropertyInformation.GetValue(DataHolder.SelectedObject).ToString();
+                    txbTextBox.Text = PropertyInformation.GetValue(DataHolder.Instance.SelectedObject).ToString();
                 }
                 else
                 {
-                    txbTextBox.Text = GetPropertyValue(DataHolder.SelectedObject, NameAbr).ToString();
+                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString();
                 }
             }
             else if (FieldInformation != null)
             {
                 if (FieldInformation.FieldType.FullName.Contains("System"))
                 {
-                    txbTextBox.Text = FieldInformation.GetValue(DataHolder.SelectedObject).ToString();
+                    txbTextBox.Text = FieldInformation.GetValue(DataHolder.Instance.SelectedObject).ToString();
                 }
                 else
                 {
-                    txbTextBox.Text = GetPropertyValue(DataHolder.SelectedObject, NameAbr).ToString();
+                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString();
                 }
             }
         }
@@ -80,11 +80,11 @@ namespace UsingReflaction.UserControls
         {
             if (PropertyInformation != null)
             {
-                PropertyInformation.SetValue(DataHolder.SelectedObject, txbTextBox.Text);
+                PropertyInformation.SetValue(DataHolder.Instance.SelectedObject, txbTextBox.Text);
             }
             else if (FieldInformation != null)
             {
-                FieldInformation.SetValue(DataHolder.SelectedObject, txbTextBox.Text);
+                FieldInformation.SetValue(DataHolder.Instance.SelectedObject, txbTextBox.Text);
             }
         }
 

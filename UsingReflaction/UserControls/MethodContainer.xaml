@@ -7,10 +7,17 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <TextBlock Name="lblMethodName" Text="label" Width="200" Height="20" HorizontalAlignment="Left"  Margin="5"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Class name" Width="100" Margin="5" FontSize="14px"/>
+                <TextBlock Name="lblMethodName" Text="label" Width="200" Margin="5"/>             
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="lblVariable" Text="Variable name" Width="100" Height="20" Margin="5" Visibility="Hidden"/>
+                <TextBox Name="txbVariableName" Text="Enter variable name" Width="200" Visibility="Hidden"/>
+            </StackPanel>
             <StackPanel  Orientation="Vertical" Name="stpMethodParametersContainer" HorizontalAlignment="Left" Margin="5"/>
             <Button Name="btnMethodRun" Content="Run the method" HorizontalAlignment="Left" Width="100" Height="20" Click="btnMethodRun_Click" Margin="5"/>
-            <TextBlock Name="txbResult" Width="200" Height="20" HorizontalAlignment="Left" Margin="5"/>           
+            <TextBlock Name="txbResult" Width="200" Height="20" HorizontalAlignment="Left" Margin="5"/>
         </StackPanel>
     </Grid>
 </UserControl>

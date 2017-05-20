@@ -56,11 +56,11 @@ namespace UsingReflaction.UserControls
         {
             if (PropertyInformation != null)
             {
-                PropertyInformation.SetValue(DataHolder.SelectedObject, chkCheckBox.IsChecked);
+                PropertyInformation.SetValue(DataHolder.Instance.SelectedObject, chkCheckBox.IsChecked);
             }
             else if (FieldInformation != null)
             {
-                FieldInformation.SetValue(DataHolder.SelectedObject, chkCheckBox.IsChecked);
+                FieldInformation.SetValue(DataHolder.Instance.SelectedObject, chkCheckBox.IsChecked);
             }
         }
 

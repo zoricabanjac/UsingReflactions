@@ -48,20 +48,6 @@ namespace UsingReflaction.UserControls
             }
         }
 
-        private MethodInfo methodInformation;
-        public MethodInfo MethodInformation
-        {
-            set
-            {
-                TypeFullName = methodInformation.ReturnType.ToString();
-                NameAbr = methodInformation.Name;
-            }
-            get
-            {
-                return methodInformation;
-            }
-        }
-
         public FieldInfo FieldInformation { get; set; }
         public PropertyInfo PropertyInformation { get; set; }
         public StackPanel StackPanelInfo { get; set; }

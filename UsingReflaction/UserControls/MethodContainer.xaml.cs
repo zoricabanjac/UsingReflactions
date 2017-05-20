@@ -13,7 +13,6 @@ namespace UsingReflaction.UserControls
     public partial class MethodContainer : UserControl
     {
         public Object MyObject { get; set; }
-        public Object MyMethResults { get; set; }
         public Helper.MethodType MethodTypeInfo { get; set; }
 
         public MethodContainer()
@@ -39,6 +38,8 @@ namespace UsingReflaction.UserControls
                 myConstructorInfo = obj as MyConstructorInfo;
                 parametersList = myConstructorInfo.Parameters;
                 lblMethodName.Text = myConstructorInfo.ConstructorName;
+                txbVariableName.Visibility = Visibility.Visible;
+                lblVariable.Visibility = Visibility.Visible;
             }
 
             MethodTypeInfo = methodType;
@@ -99,7 +100,7 @@ namespace UsingReflaction.UserControls
 
                 if (myMethodInfo != null)
                 {
-                    Object result = myMethodInfo.MethodInfo.Invoke(myMethodInfo.SelectedObject, myMethodInfo.Parameters.Count == 0 ? null : args);
+                    Object result = myMethodInfo.MethodInfo.Invoke(DataHolder.Instance.SelectedObject, myMethodInfo.Parameters.Count == 0 ? null : args);
 
                     if (myMethodInfo.ReturnType == "System.String" && result != null)
                     {
@@ -111,10 +112,15 @@ namespace UsingReflaction.UserControls
             {
                 myConstructorInfo = MyObject as MyConstructorInfo;
 
+                Type type = Helper.GetType((myConstructorInfo.ConstructorName));
+                var instance = Activator.CreateInstance(type);
+
                 if (myConstructorInfo != null)
                 {
-                    myConstructorInfo.ConstructorInfo.Invoke(myConstructorInfo.SelectedObject, myConstructorInfo.Parameters.Count == 0 ? null : args);
+                    myConstructorInfo.ConstructorInfo.Invoke(instance, myConstructorInfo.Parameters.Count == 0 ? null : args);
                 }
+
+                DataHolder.Instance.CreateNewObject(txbVariableName.Text, instance);
             }
         }
     }

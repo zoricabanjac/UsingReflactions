@@ -1,17 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.Entities
 {
-    public static class DataHolder
+    public class DataHolder : INotifyPropertyChanged
     {
-        public static Dictionary<string, object> Data { get; set; }
-        public static string SelectedKey { get; set; }
-        public static Object SelectedObject
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public static DataHolder Instance { get; set; }
+
+        static DataHolder()
+        {
+            Instance = new DataHolder();
+        }
+
+        private DataHolder()
+        {
+            Data = new Dictionary<string, object>();
+        }
+
+        public Dictionary<string, object> Data { get; set; }
+
+        public bool HasSelectedObject
+        {
+            get
+            {
+                return SelectedKey != null;
+            }
+        }
+
+        public Object SelectedObject
         {
             get
             {
@@ -19,7 +50,30 @@ namespace UsingReflaction.Entities
             }
         }
 
-        public static void CreateTestCustomer ()
+
+        private string selectedKey = null;
+        public string SelectedKey
+        {
+            get
+            {
+                return selectedKey;
+            }
+            set
+            {
+                selectedKey = value;
+                RaisePropertyChanged("SelectedKey");
+                RaisePropertyChanged("SelectedObject");
+                RaisePropertyChanged("HasSelectedObject");
+            }
+        }
+
+        public void CreateNewObject(string instanceName, object instance)
+        {
+            Data.Add(instanceName, instance);
+            SelectedKey = instanceName;
+        }
+
+        internal void CreateTestCustomer()
         {
             List<Order> orders = new List<Order>();
             Order order = new Order(1, "banana", 1.5);
@@ -42,12 +96,7 @@ namespace UsingReflaction.Entities
             SelectedKey = "TestCustomer";
         }
 
-        static DataHolder()
-        {
-            Data = new Dictionary<string, object>();
-        }
-
-        internal static void CreateTestPerson()
+        internal void CreateTestPerson()
         {
             Person newPerson = new Person();
             newPerson.FirstName = "Zorica";
