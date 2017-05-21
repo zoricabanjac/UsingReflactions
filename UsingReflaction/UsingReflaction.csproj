@@ -55,12 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ConsturctorConverter.cs" />
     <Compile Include="Entities\DataHolder.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="UserControls\MethodContainer.xaml.cs">
       <DependentUpon>MethodContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UserControlBase.cs" />
+    <Compile Include="UserControls\MethodParametersValueBase.cs" />
+    <Compile Include="UserControls\PropertyValueBase.cs" />
     <Compile Include="UserControls\UserControlForBool.xaml.cs">
       <DependentUpon>UserControlForBool.xaml</DependentUpon>
     </Compile>

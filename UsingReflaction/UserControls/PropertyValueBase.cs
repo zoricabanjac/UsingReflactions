@@ -4,12 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.UserControls
 {
-    public class UserControlBase: UserControl
+    public class PropertyValueBase: UserControl
     {
         public string NameAbr { get; set; }
 

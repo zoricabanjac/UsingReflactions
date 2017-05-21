@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using UsingReflaction.Entities;
 
 namespace UsingReflaction.UserControls
@@ -12,8 +11,26 @@ namespace UsingReflaction.UserControls
     /// </summary>
     public partial class MethodContainer : UserControl
     {
+        public bool ForceEditEnabled
+        {
+            get { return (bool)GetValue(ForceEditEnabledProperty); }
+            set { SetValue(ForceEditEnabledProperty, value); }
+        }
+
+        public static readonly DependencyProperty ForceEditEnabledProperty =
+            DependencyProperty.Register("ForceEditEnabled", typeof(bool), typeof(UserControlForBool), new PropertyMetadata(false));
+
         public Object MyObject { get; set; }
         public Helper.MethodType MethodTypeInfo { get; set; }
+
+        public event EventHandler MethodExecuted;
+        private void RaiseMethodExecuted()
+        {
+            if (MethodExecuted != null)
+            {
+                MethodExecuted(this, new EventArgs());
+            }
+        }
 
         public MethodContainer()
         {
@@ -40,6 +57,7 @@ namespace UsingReflaction.UserControls
                 lblMethodName.Text = myConstructorInfo.ConstructorName;
                 txbVariableName.Visibility = Visibility.Visible;
                 lblVariable.Visibility = Visibility.Visible;
+                ForceEditEnabled = true;
             }
 
             MethodTypeInfo = methodType;
@@ -106,6 +124,8 @@ namespace UsingReflaction.UserControls
                     {
                         txbResult.Text = result.ToString();
                     }
+
+                    RaiseMethodExecuted();
                 }
             }
             else
@@ -121,6 +141,7 @@ namespace UsingReflaction.UserControls
                 }
 
                 DataHolder.Instance.CreateNewObject(txbVariableName.Text, instance);
+                RaiseMethodExecuted();
             }
         }
     }

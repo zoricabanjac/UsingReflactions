@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="400" Height="50" Background="Azure" MinWidth="500">
+             d:DesignHeight="50" d:DesignWidth="400" Height="50" MinWidth="500">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Name="lblParameterName" Text="label" Width="100" Height="20"/>
-            <TextBox Name="txbTextBox" HorizontalAlignment="Left" Width="150" Height="20"/>
+            <TextBlock Name="lblParameterName" Text="label" Width="100" Height="25"/>
+            <TextBox Name="txbTextBox" HorizontalAlignment="Left" Width="250" Height="25"/>
         </StackPanel>
     </Grid>
 </UserControl>

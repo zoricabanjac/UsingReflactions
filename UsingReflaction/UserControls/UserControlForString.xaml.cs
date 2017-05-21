@@ -1,27 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UsingReflaction.Entities;
-using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.UserControls
 {
     /// <summary>
     /// Interaction logic for UserControlForString.xaml
     /// </summary>
-    public partial class UserControlForString : UserControlBase
+    public partial class UserControlForString : PropertyValueBase
     {
         public string ControlName
         {
@@ -46,7 +34,7 @@ namespace UsingReflaction.UserControls
             {
                 btnSetValue.IsEnabled = false;
             }
-            
+
             lblLabel.Text = NameAbr;
         }
 
@@ -56,22 +44,22 @@ namespace UsingReflaction.UserControls
             {
                 if (PropertyInformation.PropertyType.FullName.Contains("System"))
                 {
-                    txbTextBox.Text = PropertyInformation.GetValue(DataHolder.Instance.SelectedObject).ToString();
+                    txbTextBox.Text = PropertyInformation.GetValue(DataHolder.Instance.SelectedObject) != null ? PropertyInformation.GetValue(DataHolder.Instance.SelectedObject).ToString() : string.Empty;
                 }
                 else
                 {
-                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString();
+                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr) != null ? GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString() : string.Empty;
                 }
             }
             else if (FieldInformation != null)
             {
                 if (FieldInformation.FieldType.FullName.Contains("System"))
                 {
-                    txbTextBox.Text = FieldInformation.GetValue(DataHolder.Instance.SelectedObject).ToString();
+                    txbTextBox.Text = FieldInformation.GetValue(DataHolder.Instance.SelectedObject) != null ? FieldInformation.GetValue(DataHolder.Instance.SelectedObject).ToString() : string.Empty;
                 }
                 else
                 {
-                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString();
+                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr) != null ? GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString() : string.Empty;
                 }
             }
         }

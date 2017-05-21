@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using UsingReflaction.TestEntities;
 
 namespace UsingReflaction.Entities
@@ -69,8 +65,11 @@ namespace UsingReflaction.Entities
 
         public void CreateNewObject(string instanceName, object instance)
         {
-            Data.Add(instanceName, instance);
-            SelectedKey = instanceName;
+            if (!Data.ContainsKey(instanceName))
+            {
+                Data.Add(instanceName, instance);
+                SelectedKey = instanceName;
+            }
         }
 
         internal void CreateTestCustomer()

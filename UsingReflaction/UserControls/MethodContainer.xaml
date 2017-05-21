@@ -3,21 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:data="clr-namespace:UsingReflaction.Entities"
+             xmlns:converter="clr-namespace:UsingReflaction.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="250">
+    <UserControl.Resources>
+        <converter:ConsturctorConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Class name" Width="100" Margin="5" FontSize="14px"/>
-                <TextBlock Name="lblMethodName" Text="label" Width="200" Margin="5"/>             
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Name="lblVariable" Text="Variable name" Width="100" Height="20" Margin="5" Visibility="Hidden"/>
-                <TextBox Name="txbVariableName" Text="Enter variable name" Width="200" Visibility="Hidden"/>
-            </StackPanel>
-            <StackPanel  Orientation="Vertical" Name="stpMethodParametersContainer" HorizontalAlignment="Left" Margin="5"/>
-            <Button Name="btnMethodRun" Content="Run the method" HorizontalAlignment="Left" Width="100" Height="20" Click="btnMethodRun_Click" Margin="5"/>
-            <TextBlock Name="txbResult" Width="200" Height="20" HorizontalAlignment="Left" Margin="5"/>
-        </StackPanel>
+        <GroupBox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="30"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Class name" Margin="5" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"/>
+                <TextBlock Name="lblMethodName" Text="label" Margin="5" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left"/>
+
+                <TextBlock Name="lblVariable" Text="Variable name" Margin="5" Visibility="Hidden" Grid.Row="3" Grid.Column="0" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBox Name="txbVariableName" Text="Enter variable name" Visibility="Hidden" Grid.Row="3" Grid.Column="1" Width="250" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left"/>
+
+                <StackPanel Name="stpMethodParametersContainer" Grid.Row="5" Grid.ColumnSpan ="2"/>
+
+                <Button Name="btnMethodRun" Content="Run the method" HorizontalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="2" Click ="btnMethodRun_Click"  Height="20" Width="100" FontSize="12" Grid.RowSpan="2">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Source="{x:Static data:DataHolder.Instance}" Path="HasSelectedObject" />
+                            <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}" Path="ForceEditEnabled" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+                <TextBlock Name="txbResult" HorizontalAlignment="Left" Margin="5" Grid.Row="9" Grid.Column="0" Width="100" Height="25"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>
