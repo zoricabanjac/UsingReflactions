@@ -3,22 +3,22 @@ using UsingReflection.Entities;
 
 namespace UsingReflection.UserControls
 {
-    public partial class UserControlForStringParameter : UserControl
+    public partial class UserControlForBoolParameter : UserControl
     {
-        public string ParameterValue
+        public bool? ParameterValue
         {
             get
             {
-                return txbTextBox.Text;
+                return chkCheckBox.IsChecked;
             }
         }
 
-        public UserControlForStringParameter()
+        public UserControlForBoolParameter()
         {
             InitializeComponent();
         }
 
-        public UserControlForStringParameter(MyParameterInfo parameter)
+        public UserControlForBoolParameter(MyParameterInfo parameter)
             : this()
         {
             lblParameterName.Text = parameter.ParameterName;

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ namespace UsingReflection.UserControls
     /// <summary>
     /// Interaction logic for UserControlForString.xaml
     /// </summary>
-    public partial class UserControlForString : PropertyValueBase
+    public partial class UserControlForInt : PropertyValueBase
     {
         public string ControlName
         {
@@ -19,12 +20,12 @@ namespace UsingReflection.UserControls
             }
         }
 
-        public UserControlForString()
+        public UserControlForInt()
         {
             InitializeComponent();
         }
 
-        public UserControlForString(MemberInfo info, StackPanel stackPanelInfo)
+        public UserControlForInt(MemberInfo info, StackPanel stackPanelInfo)
             : this()
         {
             this.MemberInformation = info;

@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using UsingReflaction.TestEntities;
+using UsingReflection.TestEntities;
 
-namespace UsingReflaction.UserControls
+namespace UsingReflection.UserControls
 {
     public class PropertyValueBase: UserControl
     {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace UsingReflaction.Entities
+namespace UsingReflection.Entities
 {
     public class MyFieldInfo
     {

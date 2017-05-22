@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using UsingReflaction.Entities;
+using UsingReflection.Entities;
 
-namespace UsingReflaction.UserControls
+namespace UsingReflection.UserControls
 {
-    /// <summary>
-    /// Interaction logic for MethodContainer.xaml
-    /// </summary>
     public partial class MethodContainer : UserControl
     {
         public bool ForceEditEnabled
@@ -74,6 +71,11 @@ namespace UsingReflaction.UserControls
                     UserControls.UserControlForIntParameter control = new UserControls.UserControlForIntParameter(parameter);
                     stpMethodParametersContainer.Children.Add(control);
                 }
+                else if (string.Equals(parameter.ParameterType, "Boolean"))
+                {
+                    UserControls.UserControlForBoolParameter control = new UserControls.UserControlForBoolParameter(parameter);
+                    stpMethodParametersContainer.Children.Add(control);
+                }
                 else
                 {
                     return;
@@ -97,15 +99,16 @@ namespace UsingReflaction.UserControls
 
                 if (stpMethodParametersContainer.Children[i] is UserControlForIntParameter)
                 {
-                    try
-                    {
-                        UserControlForIntParameter controlElement = stpMethodParametersContainer.Children[i] as UserControlForIntParameter;
-                        args[i] = controlElement.ParameterValue;
-                    }
-                    catch (Exception ex)
-                    {
-                        return;
-                    }
+
+                    UserControlForIntParameter controlElement = stpMethodParametersContainer.Children[i] as UserControlForIntParameter;
+                    args[i] = controlElement.ParameterValue;
+                }
+
+                if (stpMethodParametersContainer.Children[i] is UserControlForBoolParameter)
+                {
+
+                    UserControlForBoolParameter controlElement = stpMethodParametersContainer.Children[i] as UserControlForBoolParameter;
+                    args[i] = controlElement.ParameterValue;
                 }
             }
 

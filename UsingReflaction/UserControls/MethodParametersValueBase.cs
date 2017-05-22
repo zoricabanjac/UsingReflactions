@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace UsingReflaction.UserControls
+namespace UsingReflection.UserControls
 {
     public class MethodParametersValueBase : UserControl
     {

@@ -4,55 +4,61 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using UsingReflaction.Entities;
+using UsingReflection.Entities;
 using System.Linq;
 
-namespace UsingReflaction
+namespace UsingReflection
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<string> TypeOptions { get; set; }
+        private ObservableCollection<string> NameSpaceOptions { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
             TypeOptions = new ObservableCollection<string>();
             NameSpaceOptions = new ObservableCollection<string>();
-            NameSpaceOptions.Add("UsingReflaction");
-           // TypeOptions.Add("UsingReflaction.TestEntities.Customer");
+            NameSpaceOptions.Add("UsingReflection");
+            NameSpaceOptions.Add("UsingReflection.TestEntities");
             cbTypeClass.ItemsSource = TypeOptions;
             cbNamespace.ItemsSource = NameSpaceOptions;
         }
+
         private void btnSearchNamespace_Click(object sender, RoutedEventArgs e)
         {
             var types = from type in Assembly.GetExecutingAssembly().GetTypes()
                     where type.IsClass && type.Namespace == cbNamespace.Text
                     select type;
 
-            foreach(var type in types)
+            foreach (var type in types)
             {
-                TypeOptions.Add(type.ToString());
+                if (!TypeOptions.Contains(type.ToString()))
+                {
+                    TypeOptions.Add(type.ToString());
+                }
             }
-
         }
 
         private void btnSearchClass_Click(object sender, RoutedEventArgs e)
         {
+            DataHolder.Instance.SelectedKey = null;
             Type type = Helper.GetType(cbTypeClass.Text);
             if (type == null)
             {
                 return;
             }
-
-            MakeElements(type);
+         
+            MakeElements(type);     
         }
-
-        private ObservableCollection<string> TypeOptions { get; set; }
-        private ObservableCollection<string> NameSpaceOptions { get; set; }
 
         private void MakeElements(Type type)
         {
+            ClearUIElements();
             if (!NameSpaceOptions.Contains(cbNamespace.Text))
             {
                 NameSpaceOptions.Add(cbNamespace.Text);
@@ -64,8 +70,7 @@ namespace UsingReflaction
             }
 
             MyClassInfo myClass = new MyClassInfo();
-            ClearUIElements();
-
+            
             MakeBaseDataElements(myClass, type);
             MakeFieldsElements(myClass, type);
             MakePropertyElements(myClass, type);
@@ -89,7 +94,7 @@ namespace UsingReflaction
             stpMethodsDynamic.Children.Clear();
             stpPropertiesDynamic.Children.Clear();
             dgVariables.UnselectAll();
-            DataHolder.Instance.SelectedKey = null;
+            
         }
 
         private static List<MyEventInfo> MakeEventsElements(Type type)
@@ -230,16 +235,24 @@ namespace UsingReflaction
                 fullName = propertyInfo.PropertyType.FullName;
             }
 
-            if (string.Equals(fullName, "System.String") || !fullName.Contains("System"))
+            if (string.Equals(fullName, "System.Int32"))
+            {
+                UserControls.UserControlForInt control = new UserControls.UserControlForInt(info, stackPanelInfo);
+                stackPanelInfo.Children.Add(control);
+            }
+            else if (string.Equals(fullName, "System.Boolean"))
+            {
+                UserControls.UserControlForBool control = new UserControls.UserControlForBool(info, stackPanelInfo);
+                stackPanelInfo.Children.Add(control);
+            }
+            else if(string.Equals(fullName, "System.String"))
             {
                 UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
             }
-
-            if (string.Equals(fullName, "System.Boolean"))
+            else
             {
-                UserControls.UserControlForBool control = new UserControls.UserControlForBool(info, stackPanelInfo);
-                stackPanelInfo.Children.Add(control);
+                return;
             }
         }
 
@@ -258,7 +271,6 @@ namespace UsingReflaction
             if (e.AddedItems.Count > 0)
             {
                 var instance = e.AddedItems[0];
-                //Object obj = ((DataGridRow)(sender)).Item;
                 DataHolder.Instance.SelectedKey = ((KeyValuePair<string, object>)instance).Key;
 
                 Type type = Helper.GetType(DataHolder.Instance.SelectedObject.ToString());
@@ -273,7 +285,6 @@ namespace UsingReflaction
             {
 
             }
-
         }
 
         private void dgConsturctors_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -288,7 +299,6 @@ namespace UsingReflaction
             {
 
             }
-
         }
 
         private void dgMethods_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -296,14 +306,13 @@ namespace UsingReflaction
             if (e.AddedItems.Count > 0)
             {
                 var obj = e.AddedItems[0];
-                // Object obj = ((DataGridRow)(sender)).Item;
+
                 DesignControlForMethod(obj, stpMethodsDynamic, Helper.MethodType.MethodType);
             }
             else
             {
 
             }
-
         }
     }
 }

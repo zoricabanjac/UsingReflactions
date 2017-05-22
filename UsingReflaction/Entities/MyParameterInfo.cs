@@ -1,4 +1,4 @@
-﻿namespace UsingReflaction.Entities
+﻿namespace UsingReflection.Entities
 {
     public class MyParameterInfo
     {

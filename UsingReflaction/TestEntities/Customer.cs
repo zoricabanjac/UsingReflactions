@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UsingReflaction.TestEntities
+namespace UsingReflection.TestEntities
 {
     public class Customer : Person
     {
@@ -15,10 +15,11 @@ namespace UsingReflaction.TestEntities
 
         public bool isPrivileged;
 
+        public int CustomerId { get; set; }
         public string EmailAddress { get; set; }
         public Address MailingAddress { get; set; }
         public List<Order> Orders = new List<Order>();
-
+  
         public Customer() { }
 
         public Customer(string firstName, string lastName)
@@ -41,9 +42,10 @@ namespace UsingReflaction.TestEntities
         {
             return message + " sent"; 
         }
-        public string SendMessage(string message, int numberOfReceivers) 
+
+        public string SendMessage(string message, int numberOfReceivers, bool isSent)
         {
-            return message + " sent to " + numberOfReceivers + "receivers";
+            return message + " sent to " + numberOfReceivers + "receivers " + isSent;
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using UsingReflaction.TestEntities;
+using UsingReflection.TestEntities;
 
-namespace UsingReflaction.Entities
+namespace UsingReflection.Entities
 {
     public class DataHolder : INotifyPropertyChanged
     {

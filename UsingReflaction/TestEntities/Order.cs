@@ -1,4 +1,4 @@
-﻿namespace UsingReflaction.TestEntities
+﻿namespace UsingReflection.TestEntities
 {
     public class Order
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using UsingReflaction.Entities;
+using UsingReflection.Entities;
 
-namespace UsingReflaction.UserControls
+namespace UsingReflection.UserControls
 {
     /// <summary>
     /// Interaction logic for UserControlForIntParameter.xaml

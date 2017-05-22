@@ -7,7 +7,7 @@
     <ProjectGuid>{F460F814-FB33-429D-A152-707706ECC36F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UsingReflaction</RootNamespace>
+    <RootNamespace>UsingReflection</RootNamespace>
     <AssemblyName>UsingReflaction</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -63,11 +63,17 @@
     </Compile>
     <Compile Include="UserControls\MethodParametersValueBase.cs" />
     <Compile Include="UserControls\PropertyValueBase.cs" />
+    <Compile Include="UserControls\UserControlForBoolParameter.xaml.cs">
+      <DependentUpon>UserControlForBoolParameter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserControlForBool.xaml.cs">
       <DependentUpon>UserControlForBool.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserControlForIntParameter.xaml.cs">
       <DependentUpon>UserControlForIntParameter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlForInt.xaml.cs">
+      <DependentUpon>UserControlForInt.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserControlForString.xaml.cs">
       <DependentUpon>UserControlForString.xaml</DependentUpon>
@@ -101,6 +107,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UserControlForBoolParameter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\UserControlForBool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +118,10 @@
     <Page Include="UserControls\UserControlForIntParameter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlForInt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\UserControlForString.xaml">
       <SubType>Designer</SubType>

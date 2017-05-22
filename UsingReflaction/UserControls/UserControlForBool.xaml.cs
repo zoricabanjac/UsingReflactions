@@ -2,9 +2,9 @@
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using UsingReflaction.Entities;
+using UsingReflection.Entities;
 
-namespace UsingReflaction.UserControls
+namespace UsingReflection.UserControls
 {
     public partial class UserControlForBool : PropertyValueBase
     {
@@ -26,18 +26,17 @@ namespace UsingReflaction.UserControls
             this.MemberInformation = info;
             this.StackPanelInfo = stackPanelInfo;
             lblLabel.Text = NameAbr;
-           
-            //chkCheckBox.IsChecked = myobj.isPrivileged;
         }
 
         public object GetPropertyValue(object obj, string propertyName)
         {
             foreach (var prop in propertyName.Split('.').Select(s => obj.GetType().GetProperty(s)))
+            {
                 obj = prop.GetValue(obj, null);
+            }
 
             return obj;
         }
-
 
         private void chkCheckBox_CheckChanged(object sender, RoutedEventArgs e)
         {
@@ -49,11 +48,6 @@ namespace UsingReflaction.UserControls
             {
                 FieldInformation.SetValue(DataHolder.Instance.SelectedObject, chkCheckBox.IsChecked);
             }
-        }
-
-        private void chkCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
