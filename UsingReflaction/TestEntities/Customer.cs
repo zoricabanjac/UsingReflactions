@@ -15,6 +15,7 @@ namespace UsingReflection.TestEntities
 
         public bool isPrivileged;
 
+        public bool isSolvent{get; set; }
         public int CustomerId { get; set; }
         public string EmailAddress { get; set; }
         public Address MailingAddress { get; set; }

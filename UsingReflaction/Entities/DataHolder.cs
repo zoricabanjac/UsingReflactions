@@ -68,7 +68,6 @@ namespace UsingReflection.Entities
             if (!Data.ContainsKey(instanceName))
             {
                 Data.Add(instanceName, instance);
-                SelectedKey = instanceName;
             }
         }
 

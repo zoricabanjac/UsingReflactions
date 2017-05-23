@@ -58,28 +58,28 @@
     <Compile Include="Converters\ConsturctorConverter.cs" />
     <Compile Include="Entities\DataHolder.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="UserControls\MethodContainer.xaml.cs">
+    <Compile Include="PropertiesUserContols\UCForBool.xaml.cs">
+      <DependentUpon>UCForBool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertiesUserContols\UCForInt.xaml.cs">
+      <DependentUpon>UCForInt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertiesUserContols\UCForString.xaml.cs">
+      <DependentUpon>UCForString.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertiesUserContols\PropertyValueBase.cs" />
+    <Compile Include="MethodsUserControls\MethodContainer.xaml.cs">
       <DependentUpon>MethodContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\MethodParametersValueBase.cs" />
-    <Compile Include="UserControls\PropertyValueBase.cs" />
-    <Compile Include="UserControls\UserControlForBoolParameter.xaml.cs">
-      <DependentUpon>UserControlForBoolParameter.xaml</DependentUpon>
+    <Compile Include="MethodsUserControls\MethodParametersValueBase.cs" />
+    <Compile Include="MethodsUserControls\UCForBoolParameter.xaml.cs">
+      <DependentUpon>UCForBoolParameter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UserControlForBool.xaml.cs">
-      <DependentUpon>UserControlForBool.xaml</DependentUpon>
+    <Compile Include="MethodsUserControls\UCForIntParameter.xaml.cs">
+      <DependentUpon>UCForIntParameter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UserControlForIntParameter.xaml.cs">
-      <DependentUpon>UserControlForIntParameter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserControlForInt.xaml.cs">
-      <DependentUpon>UserControlForInt.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserControlForString.xaml.cs">
-      <DependentUpon>UserControlForString.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserControlForStringParameter.xaml.cs">
-      <DependentUpon>UserControlForStringParameter.xaml</DependentUpon>
+    <Compile Include="MethodsUserControls\UCForStringParameter.xaml.cs">
+      <DependentUpon>UCForStringParameter.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,31 +103,31 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\MethodContainer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UserControlForBoolParameter.xaml">
+    <Page Include="PropertiesUserContols\UCForBool.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\UserControlForBool.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UserControlForIntParameter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UserControlForInt.xaml">
+    <Page Include="PropertiesUserContols\UCForInt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\UserControlForString.xaml">
+    <Page Include="PropertiesUserContols\UCForString.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MethodsUserControls\MethodContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UserControlForStringParameter.xaml">
+    <Page Include="MethodsUserControls\UCForBoolParameter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MethodsUserControls\UCForIntParameter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MethodsUserControls\UCForStringParameter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

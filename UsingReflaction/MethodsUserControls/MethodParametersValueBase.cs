@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using UsingReflection.PropertiesUserContols;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.MethodsUserContols
 {
     public class MethodParametersValueBase : UserControl
     {
@@ -12,7 +13,7 @@ namespace UsingReflection.UserControls
         }
 
         public static readonly DependencyProperty ForceEditEnabledProperty =
-            DependencyProperty.Register("ForceEditEnabled", typeof(bool), typeof(UserControlForBool), new PropertyMetadata(false));
+            DependencyProperty.Register("ForceEditEnabled", typeof(bool), typeof(UCForBool), new PropertyMetadata(false));
 
     }
 }

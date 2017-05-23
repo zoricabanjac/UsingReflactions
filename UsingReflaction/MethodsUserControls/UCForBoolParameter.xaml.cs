@@ -1,9 +1,10 @@
 ﻿using System.Windows.Controls;
 using UsingReflection.Entities;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.MethodsUserContols
+
 {
-    public partial class UserControlForBoolParameter : UserControl
+    public partial class UCForBoolParameter : UserControl
     {
         public bool? ParameterValue
         {
@@ -13,12 +14,12 @@ namespace UsingReflection.UserControls
             }
         }
 
-        public UserControlForBoolParameter()
+        public UCForBoolParameter()
         {
             InitializeComponent();
         }
 
-        public UserControlForBoolParameter(MyParameterInfo parameter)
+        public UCForBoolParameter(MyParameterInfo parameter)
             : this()
         {
             lblParameterName.Text = parameter.ParameterName;

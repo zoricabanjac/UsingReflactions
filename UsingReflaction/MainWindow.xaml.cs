@@ -204,7 +204,7 @@ namespace UsingReflection
         {
             stackPanel.Children.Clear();
 
-            UserControls.MethodContainer container = new UserControls.MethodContainer(obj, methodInfo);
+            MethodsUserContols.MethodContainer container = new MethodsUserContols.MethodContainer(obj, methodInfo);
 
             if (methodInfo == Helper.MethodType.ConstructorType)
             {
@@ -237,23 +237,21 @@ namespace UsingReflection
 
             if (string.Equals(fullName, "System.Int32"))
             {
-                UserControls.UserControlForInt control = new UserControls.UserControlForInt(info, stackPanelInfo);
+                PropertiesUserContols.UCForInt control = new PropertiesUserContols.UCForInt(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
             }
-            else if (string.Equals(fullName, "System.Boolean"))
+
+            if (string.Equals(fullName, "System.Boolean"))
             {
-                UserControls.UserControlForBool control = new UserControls.UserControlForBool(info, stackPanelInfo);
+                PropertiesUserContols.UCForBool control = new PropertiesUserContols.UCForBool(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
             }
-            else if(string.Equals(fullName, "System.String"))
+
+            if (string.Equals(fullName, "System.String") || !fullName.Contains("System"))
             {
-                UserControls.UserControlForString control = new UserControls.UserControlForString(info, stackPanelInfo);
+                PropertiesUserContols.UCForString control = new PropertiesUserContols.UCForString(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
-            }
-            else
-            {
-                return;
-            }
+            }     
         }
 
         private void btnNewCustomer_Click(object sender, RoutedEventArgs e)

@@ -1,9 +1,9 @@
 ﻿using System.Windows.Controls;
 using UsingReflection.Entities;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.MethodsUserContols
 {
-    public partial class UserControlForStringParameter : UserControl
+    public partial class UCForStringParameter : UserControl
     {
         public string ParameterValue
         {
@@ -13,12 +13,12 @@ namespace UsingReflection.UserControls
             }
         }
 
-        public UserControlForStringParameter()
+        public UCForStringParameter()
         {
             InitializeComponent();
         }
 
-        public UserControlForStringParameter(MyParameterInfo parameter)
+        public UCForStringParameter(MyParameterInfo parameter)
             : this()
         {
             lblParameterName.Text = parameter.ParameterName;

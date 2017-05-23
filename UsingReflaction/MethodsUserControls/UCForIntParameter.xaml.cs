@@ -3,14 +3,14 @@ using System.Windows;
 using System.Windows.Controls;
 using UsingReflection.Entities;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.MethodsUserContols
 {
     /// <summary>
     /// Interaction logic for UserControlForIntParameter.xaml
     /// </summary>
-    public partial class UserControlForIntParameter : UserControl
+    public partial class UCForIntParameter : UserControl
     {
-        public UserControlForIntParameter()
+        public UCForIntParameter()
         {
             InitializeComponent();
         }
@@ -29,12 +29,14 @@ namespace UsingReflection.UserControls
                 else
                 {
                     MessageBox.Show("Enter the number", "Error");
-                    throw new Exception();  
+                    throw new Exception();
                 }
+                
             }
+
         }
 
-        public UserControlForIntParameter(MyParameterInfo parameter)
+        public UCForIntParameter(MyParameterInfo parameter)
             : this()
         {
             lblParameterName.Text = parameter.ParameterName;

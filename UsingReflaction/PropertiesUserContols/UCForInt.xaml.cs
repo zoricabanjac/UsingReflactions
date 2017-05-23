@@ -5,12 +5,12 @@ using System.Windows;
 using System.Windows.Controls;
 using UsingReflection.Entities;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.PropertiesUserContols
 {
     /// <summary>
     /// Interaction logic for UserControlForString.xaml
     /// </summary>
-    public partial class UserControlForInt : PropertyValueBase
+    public partial class UCForInt : PropertyValueBase
     {
         public string ControlName
         {
@@ -20,12 +20,12 @@ namespace UsingReflection.UserControls
             }
         }
 
-        public UserControlForInt()
+        public UCForInt()
         {
             InitializeComponent();
         }
 
-        public UserControlForInt(MemberInfo info, StackPanel stackPanelInfo)
+        public UCForInt(MemberInfo info, StackPanel stackPanelInfo)
             : this()
         {
             this.MemberInformation = info;
@@ -67,13 +67,23 @@ namespace UsingReflection.UserControls
 
         private void btnSetValue_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyInformation != null)
+            string value = txbTextBox.Text;
+            int returnInt;
+
+            if (!int.TryParse(value, out returnInt))
             {
-                PropertyInformation.SetValue(DataHolder.Instance.SelectedObject, txbTextBox.Text);
+                MessageBox.Show("Enter the number", "Error");
             }
-            else if (FieldInformation != null)
+            else
             {
-                FieldInformation.SetValue(DataHolder.Instance.SelectedObject, txbTextBox.Text);
+                if (PropertyInformation != null)
+                {
+                    PropertyInformation.SetValue(DataHolder.Instance.SelectedObject, returnInt);
+                }
+                else if (FieldInformation != null)
+                {
+                    FieldInformation.SetValue(DataHolder.Instance.SelectedObject, returnInt);
+                }
             }
         }
 

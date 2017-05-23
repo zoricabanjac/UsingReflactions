@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using UsingReflection.Entities;
+using UsingReflection.PropertiesUserContols;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.MethodsUserContols
 {
     public partial class MethodContainer : UserControl
     {
@@ -15,7 +16,7 @@ namespace UsingReflection.UserControls
         }
 
         public static readonly DependencyProperty ForceEditEnabledProperty =
-            DependencyProperty.Register("ForceEditEnabled", typeof(bool), typeof(UserControlForBool), new PropertyMetadata(false));
+            DependencyProperty.Register("ForceEditEnabled", typeof(bool), typeof(UCForBool), new PropertyMetadata(false));
 
         public Object MyObject { get; set; }
         public Helper.MethodType MethodTypeInfo { get; set; }
@@ -63,17 +64,17 @@ namespace UsingReflection.UserControls
             {
                 if (string.Equals(parameter.ParameterType, "String"))
                 {
-                    UserControls.UserControlForStringParameter control = new UserControls.UserControlForStringParameter(parameter);
+                    MethodsUserContols.UCForStringParameter control = new MethodsUserContols.UCForStringParameter(parameter);
                     stpMethodParametersContainer.Children.Add(control);
                 }
                 else if (string.Equals(parameter.ParameterType, "Int32"))
                 {
-                    UserControls.UserControlForIntParameter control = new UserControls.UserControlForIntParameter(parameter);
+                    MethodsUserContols.UCForIntParameter control = new MethodsUserContols.UCForIntParameter(parameter);
                     stpMethodParametersContainer.Children.Add(control);
                 }
                 else if (string.Equals(parameter.ParameterType, "Boolean"))
                 {
-                    UserControls.UserControlForBoolParameter control = new UserControls.UserControlForBoolParameter(parameter);
+                    MethodsUserContols.UCForBoolParameter control = new MethodsUserContols.UCForBoolParameter(parameter);
                     stpMethodParametersContainer.Children.Add(control);
                 }
                 else
@@ -91,23 +92,20 @@ namespace UsingReflection.UserControls
             object[] args = new object[childrenCount];
             for (int i = 0; i < childrenCount; i++)
             {
-                if (stpMethodParametersContainer.Children[i] is UserControlForStringParameter)
+                if (stpMethodParametersContainer.Children[i] is UCForStringParameter)
                 {
-                    UserControlForStringParameter controlElement = stpMethodParametersContainer.Children[i] as UserControlForStringParameter;
+                    UCForStringParameter controlElement = stpMethodParametersContainer.Children[i] as UCForStringParameter;
+                    args[i] = controlElement.ParameterValue;
+                }
+                if (stpMethodParametersContainer.Children[i] is UCForIntParameter)
+                {
+                    UCForIntParameter controlElement = stpMethodParametersContainer.Children[i] as UCForIntParameter;
                     args[i] = controlElement.ParameterValue;
                 }
 
-                if (stpMethodParametersContainer.Children[i] is UserControlForIntParameter)
+                if (stpMethodParametersContainer.Children[i] is UCForBoolParameter)
                 {
-
-                    UserControlForIntParameter controlElement = stpMethodParametersContainer.Children[i] as UserControlForIntParameter;
-                    args[i] = controlElement.ParameterValue;
-                }
-
-                if (stpMethodParametersContainer.Children[i] is UserControlForBoolParameter)
-                {
-
-                    UserControlForBoolParameter controlElement = stpMethodParametersContainer.Children[i] as UserControlForBoolParameter;
+                    UCForBoolParameter controlElement = stpMethodParametersContainer.Children[i] as UCForBoolParameter;
                     args[i] = controlElement.ParameterValue;
                 }
             }
@@ -123,7 +121,7 @@ namespace UsingReflection.UserControls
                 {
                     Object result = myMethodInfo.MethodInfo.Invoke(DataHolder.Instance.SelectedObject, myMethodInfo.Parameters.Count == 0 ? null : args);
 
-                    if (myMethodInfo.ReturnType == "System.String" && result != null)
+                    if ((myMethodInfo.ReturnType == "System.String" || myMethodInfo.ReturnType == "System.Int32" || myMethodInfo.ReturnType == "System.Boolean") && result != null)
                     {
                         txbResult.Text = result.ToString();
                     }

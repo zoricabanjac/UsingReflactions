@@ -4,12 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 using UsingReflection.Entities;
 
-namespace UsingReflection.UserControls
+namespace UsingReflection.PropertiesUserContols
 {
     /// <summary>
     /// Interaction logic for UserControlForString.xaml
     /// </summary>
-    public partial class UserControlForString : PropertyValueBase
+    public partial class UCForString : PropertyValueBase
     {
         public string ControlName
         {
@@ -19,12 +19,12 @@ namespace UsingReflection.UserControls
             }
         }
 
-        public UserControlForString()
+        public UCForString()
         {
             InitializeComponent();
         }
 
-        public UserControlForString(MemberInfo info, StackPanel stackPanelInfo)
+        public UCForString(MemberInfo info, StackPanel stackPanelInfo)
             : this()
         {
             this.MemberInformation = info;
