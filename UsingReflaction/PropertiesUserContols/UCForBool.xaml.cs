@@ -27,6 +27,11 @@ namespace UsingReflection.PropertiesUserContols
             this.MemberInformation = info;
             this.StackPanelInfo = stackPanelInfo;
             lblLabel.Text = NameAbr;
+
+            if (DataHolder.Instance.SelectedKey != null)
+            {
+                FillUIElements();
+            }
         }
 
         public object GetPropertyValue(object obj, string propertyName)
@@ -37,6 +42,44 @@ namespace UsingReflection.PropertiesUserContols
             }
 
             return obj;
+        }
+
+        private void FillUIElements()
+        {
+            if (PropertyInformation != null)
+            {
+                if (PropertyInformation.PropertyType.FullName.Contains("System"))
+                {
+                    if (PropertyInformation.GetValue(DataHolder.Instance.SelectedObject) != null)
+                    {
+                        chkCheckBox.IsChecked = (bool)PropertyInformation.GetValue(DataHolder.Instance.SelectedObject);
+                    }
+                }
+                else
+                {
+                    if (GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr) != null)
+                    {
+                        chkCheckBox.IsChecked = (bool)GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr);
+                    }
+                }
+            }
+            else if (FieldInformation != null)
+            {
+                if (FieldInformation.FieldType.FullName.Contains("System"))
+                {
+                    if (FieldInformation.GetValue(DataHolder.Instance.SelectedObject) != null)
+                    {
+                        chkCheckBox.IsChecked = (bool)FieldInformation.GetValue(DataHolder.Instance.SelectedObject);
+                    }
+                }
+                else
+                {
+                    if (GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr) != null)
+                    {
+                        chkCheckBox.IsChecked = (bool)GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr);
+                    }
+                }
+            }
         }
 
         private void btnGetValue_Click(object sender, RoutedEventArgs e)

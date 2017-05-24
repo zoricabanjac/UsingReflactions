@@ -99,7 +99,7 @@
             <TabItem Header="Property" Name="tbProperty">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="520"></ColumnDefinition>
+                        <ColumnDefinition Width="470"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -119,13 +119,13 @@
                         <TextBlock Text="Properties: " Width="100" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="5" FontWeight="Bold"/>
                         <DataGrid Height="Auto" Name="dgProperties" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalScrollBarVisibility ="Auto" VerticalAlignment="Stretch" IsReadOnly="True" Grid.ColumnSpan="2" Width="500">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding PropertyName}" Header="Property type" Width="200"/>
-                                <DataGridTextColumn Binding="{Binding PropertyType}" Header="Property name" Width="*" />
+                                <DataGridTextColumn Binding="{Binding PropertyType}" Header="Property type" Width="200"/>
+                                <DataGridTextColumn Binding="{Binding PropertyName}" Header="Property name" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
                     <TextBlock Text="Get/set values: " Width="75" Grid.Column="0" Grid.Row="1"  Margin="5" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontWeight="Bold"/>
-                    <StackPanel Grid.Column="0" Grid.Row="3" Name="stpPropertiesDynamic" />
+                    <StackPanel Grid.Column="0" Grid.Row="3" Name="stpPropertiesDynamic" Margin="10"/>
                 </Grid>
             </TabItem>
             <!--<Finished Third row >-->

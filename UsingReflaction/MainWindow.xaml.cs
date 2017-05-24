@@ -32,8 +32,8 @@ namespace UsingReflection
         private void btnSearchNamespace_Click(object sender, RoutedEventArgs e)
         {
             var types = from type in Assembly.GetExecutingAssembly().GetTypes()
-                    where type.IsClass && type.Namespace == cbNamespace.Text
-                    select type;
+                        where type.IsClass && type.Namespace == cbNamespace.Text
+                        select type;
 
             foreach (var type in types)
             {
@@ -52,8 +52,8 @@ namespace UsingReflection
             {
                 return;
             }
-         
-            MakeElements(type);     
+
+            MakeElements(type);
         }
 
         private void MakeElements(Type type)
@@ -66,11 +66,11 @@ namespace UsingReflection
 
             if (!TypeOptions.Contains(cbTypeClass.Text))
             {
-                TypeOptions.Add(cbTypeClass.Text);              
+                TypeOptions.Add(cbTypeClass.Text);
             }
 
             MyClassInfo myClass = new MyClassInfo();
-            
+
             MakeBaseDataElements(myClass, type);
             MakeFieldsElements(myClass, type);
             MakePropertyElements(myClass, type);
@@ -94,7 +94,7 @@ namespace UsingReflection
             stpMethodsDynamic.Children.Clear();
             stpPropertiesDynamic.Children.Clear();
             dgVariables.UnselectAll();
-            
+
         }
 
         private static List<MyEventInfo> MakeEventsElements(Type type)
@@ -251,18 +251,18 @@ namespace UsingReflection
             {
                 PropertiesUserContols.UCForString control = new PropertiesUserContols.UCForString(info, stackPanelInfo);
                 stackPanelInfo.Children.Add(control);
-            }     
+            }
         }
 
-        private void btnNewCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            DataHolder.Instance.CreateTestCustomer();
-        }
+        //private void btnNewCustomer_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DataHolder.Instance.CreateTestCustomer();
+        //}
 
-        private void btnNewPerson_Click(object sender, RoutedEventArgs e)
-        {
-            DataHolder.Instance.CreateTestPerson();
-        }
+        //private void btnNewPerson_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DataHolder.Instance.CreateTestPerson();
+        //}
 
         private void dgVariables_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

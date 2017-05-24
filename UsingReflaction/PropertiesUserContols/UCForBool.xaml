@@ -7,14 +7,14 @@
              xmlns:data="clr-namespace:UsingReflection.Entities"
               
              mc:Ignorable="d" 
-            d:DesignHeight="50" d:DesignWidth="300" Height="40" MinWidth="100">
+            d:DesignHeight="50" d:DesignWidth="450" Height="40" MinWidth="400">
 
     <Grid>
-        <GroupBox>
+        <GroupBox Padding="5">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Name="lblLabel" Text="label" Width="100" Height="20" Margin="5"/>
-                <CheckBox Name="chkCheckBox" Margin="5" HorizontalAlignment="Left" Width="15" Height="20" Checked="chkCheckBox_CheckChanged" Unchecked="chkCheckBox_CheckChanged" IsEnabled="{Binding Source={x:Static data:DataHolder.Instance}, Path = HasSelectedObject}" />
-                <Button Content ="Get value" Width="75" Name="btnGetValue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnGetValue_Click" Height="20" IsEnabled="{Binding Source={x:Static data:DataHolder.Instance}, Path = HasSelectedObject}" />
+                <TextBlock Name="lblLabel" Width="100" Text="label" Height="20" />
+                <CheckBox Name="chkCheckBox" Width="250" HorizontalAlignment="Left" Height="20" Checked="chkCheckBox_CheckChanged" Unchecked="chkCheckBox_CheckChanged" IsEnabled="{Binding Source={x:Static data:DataHolder.Instance}, Path = HasSelectedObject}" />
+                <!--<Button Content ="Get value" Width="75" Name="btnGetValue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnGetValue_Click" Height="20" IsEnabled="{Binding Source={x:Static data:DataHolder.Instance}, Path = HasSelectedObject}" />-->
                 <Button Content="Set value" Width="75" Name="btnSetValue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin ="0" Click="btnSetValue_Click" Height="20" IsEnabled="{Binding Source={x:Static data:DataHolder.Instance}, Path = HasSelectedObject}" />
             </StackPanel>
         </GroupBox>

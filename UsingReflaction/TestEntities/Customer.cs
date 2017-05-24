@@ -4,29 +4,26 @@ namespace UsingReflection.TestEntities
 {
     public class Customer : Person
     {
-        public struct Address
-        {
-            public string Street, City, State, Zip;
-            public override string ToString()
-            {
-                return Street + ", " + City + ", " + State + ", " + Zip;
-            }
-        }
-
-        public bool isPrivileged;
-
-        public bool isSolvent{get; set; }
         public int CustomerId { get; set; }
         public string EmailAddress { get; set; }
+        public bool IsPrivileged { get; set; }
+
         public Address MailingAddress { get; set; }
+        public bool IsSolvent { get; set; }
+
         public List<Order> Orders = new List<Order>();
-  
+
         public Customer() { }
 
-        public Customer(string firstName, string lastName)
+        public Customer(int customerId, string firstName, string lastName, string emailAddress, bool isSolvent, bool isPrivileged)
         {
+            CustomerId = customerId;
+
             FirstName = firstName;
             LastName = lastName;
+            EmailAddress = emailAddress;
+            IsSolvent = isSolvent;
+            IsPrivileged = isPrivileged;
         }
 
         public Customer(string firstName, string lastName, params Order[] orders)
@@ -39,9 +36,9 @@ namespace UsingReflection.TestEntities
         public delegate void PaymentReceivedDelegate(decimal amount);
         public event PaymentReceivedDelegate PaymentReceived;
 
-        public string SendEmail(string message) 
+        public string SendEmail(string message)
         {
-            return message + " sent"; 
+            return message + " sent";
         }
 
         public string SendMessage(string message, int numberOfReceivers, bool isSent)

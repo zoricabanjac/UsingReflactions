@@ -37,6 +37,37 @@ namespace UsingReflection.PropertiesUserContols
             }
 
             lblLabel.Text = NameAbr;
+
+            if (DataHolder.Instance.SelectedKey != null)
+            {
+                FillUIElements();
+            }
+        }
+
+        private void FillUIElements()
+        {
+            if (PropertyInformation != null)
+            {
+                if (PropertyInformation.PropertyType.FullName.Contains("System"))
+                {
+                    txbTextBox.Text = PropertyInformation.GetValue(DataHolder.Instance.SelectedObject) != null ? PropertyInformation.GetValue(DataHolder.Instance.SelectedObject).ToString() : string.Empty;
+                }
+                else
+                {
+                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr) != null ? GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString() : string.Empty;
+                }
+            }
+            else if (FieldInformation != null)
+            {
+                if (FieldInformation.FieldType.FullName.Contains("System"))
+                {
+                    txbTextBox.Text = FieldInformation.GetValue(DataHolder.Instance.SelectedObject) != null ? FieldInformation.GetValue(DataHolder.Instance.SelectedObject).ToString() : string.Empty;
+                }
+                else
+                {
+                    txbTextBox.Text = GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr) != null ? GetPropertyValue(DataHolder.Instance.SelectedObject, NameAbr).ToString() : string.Empty;
+                }
+            }
         }
 
         private void btnGetValue_Click(object sender, RoutedEventArgs e)

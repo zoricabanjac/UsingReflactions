@@ -29,7 +29,7 @@ namespace UsingReflection.MethodsUserContols
                 else
                 {
                     MessageBox.Show("Enter the number", "Error");
-                    throw new Exception();
+                    return 0;
                 }
                 
             }
